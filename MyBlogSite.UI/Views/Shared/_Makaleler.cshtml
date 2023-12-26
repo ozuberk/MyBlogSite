@@ -1,0 +1,46 @@
+﻿@using MyBlogSite.DLL.Tablolar
+
+<div class="col-lg-8 entries">
+    <!--makaleyi yazan kişinin ismini nasıl ekleyeceğim sor.42.satır john doe. --57.satırda içeriği düzenle.-->
+    @foreach (var item in (List<Makaleler>)TempData["makaleList"])
+    {
+        <article class="entry">
+            <div class="entry-img">
+                <img src="~/Template/assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+            </div>
+            <h2 class="entry-title">
+                <a href="/Makale/MakaleDetay/@item.MakalelerID">@item.MakaleBaslik</a>
+            </h2>
+            <div class="entry-meta">
+                <ul>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#">@item.Kullanicilar.Adi @item.Kullanicilar.Soyadi</a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="2020-01-01">@item.EklenmeTarihi</time></a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#">@item.Yorumlar.Count Yorum</a></li>
+                </ul>
+            </div>
+            <div class="entry-content">
+                @{
+                    string metin = item.MakaleIcerik;
+                    if (metin.Length > 50)
+                    {
+                        metin = metin.Substring(0, 50);
+                    }
+                }
+                <p>
+                    @metin
+                </p>
+                <div class="read-more">
+                    <a href="/Makale/MakaleDetay/@item.MakalelerID">Daha Fazla</a>
+                </div>
+            </div>
+        </article><!-- End blog entry -->
+    }
+    <div class="blog-pagination">
+        <ul class="justify-content-center">
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+        </ul>
+    </div>
+
+</div><!-- End blog entries list -->

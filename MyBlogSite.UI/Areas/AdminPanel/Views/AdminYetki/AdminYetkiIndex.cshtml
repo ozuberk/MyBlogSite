@@ -1,0 +1,54 @@
+﻿@using MyBlogSite.DLL.Tablolar
+@model List<Yetkiler>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <a href='~/AdminPanel/AdminYetki/AdminYetkiEkle' class="btn btn-primary btn-block mb-3">Yetki Ekle</a>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Yetkiler</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <ul class="nav nav-pills flex-column">
+                            <li class="nav-item active">
+
+                                @foreach (var item in Model)
+                                {
+                                    <a href="#" class="nav-link">
+                                        <i class=""></i> @item.YetkiAdi
+                                        <span href='~/AdminPanel/AdminYetki/AdminYetkiSil' class='btn btn-sm btn-danger float-right'><i class='fas fa-trash'></i></span>
+                                        <span href='~/AdminPanel/AdminYetki/AdminYetkiGuncelle' class='btn btn-sm btn-warning float-right'><i class='fas fa-pencil-alt'></i></span>
+                                    </a>
+                                }
+
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card card-info card-outline">
+                    <div class="card-header">
+                        <h5 class="card-title">Görülebilir Alanlar</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="customCheckbox1" disabled>
+                            <label for="customCheckbox1" class="custom-control-label">Bütün alanları verecek görebildikleri işaretli olacak</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

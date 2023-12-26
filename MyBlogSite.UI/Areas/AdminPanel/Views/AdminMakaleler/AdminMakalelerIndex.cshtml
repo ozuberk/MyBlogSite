@@ -1,0 +1,141 @@
+﻿@using MyBlogSite.DLL.Tablolar
+@model List<MyBlogSite.DLL.SiteDatabase.Tablolar.Sp_MakaleListesiDOM>
+
+@section addTopLibrary{
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/Areas/AdminPanel/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Areas/AdminPanel/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Areas/AdminPanel/AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">
+                    @Html.ActionLink("Makale Ekle", "AdminMakaleEkle", "", new { @class = "btn btn-block btn-success col-md-3" })
+                </h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Makaleler</a></li>
+                    <li class="breadcrumb-item active">Makale Listesi</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Başlık</th>
+                                    <th>İçerik</th>
+                                    <th>Eklenme Tarihi</th>
+                                    <th>Aktif Mi</th>
+                                    <th>Kategori</th>
+                                    <th>Yazar</th>
+                                    <th>Güncelle</th>
+                                    <th>Sil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.MakalelerID</td>
+                                        <td>@item.MakaleBaslik</td>
+                                        @{
+                                            string metin = item.MakaleIcerik;
+                                            if (item.MakaleIcerik.Length > 50)
+                                            {
+                                                metin = metin.Substring(0, 50);
+                                                <td>@metin @Html.ActionLink("OKU", "", "", new { @class = "btn btn-sm btn-primary" }) </td>
+                                            }
+                                            else
+                                            {
+                                                <td>@metin</td>
+                                            }
+                                        }
+                                        <td>@item.EklenmeTarihi</td>
+                                        <td>@{string durum = item.AktifMi == true ? "EVET" : "HAYIR";}@durum</td>
+                                        <td>@item.KategoriAdi</td>
+                                        <td>@item.YazarAdSoyad</td>
+                                        <th>
+                                            @*<a href='~/AdminPanel/AdminMakaleler/AdminMakaleGuncelle' class='btn btn-sm btn-warning' id="@item.MakalelerID"><i class='fas fa-pencil-alt'></i></a>*@
+                                            @Html.ActionLink("Guncelle", "AdminMakaleGuncelle", "AdminMakaleler", new { id = item.MakalelerID }, new{@class = "btn btn-block btn-warning btn-sm" })
+
+                                        </th>
+                                        <th>
+                                            @*@Html.ActionLink("Sil", "#", "", new { @class = "btn btn-block btn-danger btn-sm" })*@
+                                            <a href='~/AdminPanel/AdminMakaleler/AdminMakaleSil/@item.MakalelerID' class='btn btn-sm btn-danger'><i class='fas fa-trash'></i></a>
+                                        </th>
+                                    </tr>
+                                }
+
+                            </tbody>
+                            <tfoot>
+                                @*<tr>
+                                        <th>Rendering engine</th>
+                                        <th>Browser</th>
+                                        <th>Platform(s)</th>
+                                        <th>Engine version</th>
+                                        <th>CSS grade</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>*@
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section addBottomLibrary{
+
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/jszip/jszip.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/dist/js/adminlte.min.js"></script>
+
+
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });</script>
+}

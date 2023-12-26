@@ -1,0 +1,80 @@
+﻿@model MyBlogSite.UI.Controllers.MakaleController.ViewModeller
+
+@{
+    ViewBag.Title = "MakaleDetay";
+}
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Makale Detay</h2>
+                <ol>
+                    <li><a href="/Anasayfa/AnasayfaIndex">Home</a></li>
+                    <li><a href="/Makale/MakaleIndex">Makaleler</a></li>
+                    <li>Makale Detay</li>
+                </ol>
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
+    <!-- ======= Blog Single Section ======= -->
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row">
+
+                <div class="col-lg-12 entries">
+
+                    <article class="entry entry-single">
+
+
+
+                        <div class="entry-title">
+                            <h1>@Model.Makale.MakaleBaslik</h1>
+                        </div>
+                        <div class="entry-content">
+                            <p>
+                                @Html.Raw(Model.Makale.MakaleIcerik)
+                            </p>
+                        </div>
+
+                    </article><!-- End blog entry -->
+
+                    <div class="blog-author d-flex align-items-center">
+                        <img src="~/Template/assets/img/blog/blog-author.jpg" class="rounded-circle float-left" alt="">
+                        <div>
+
+
+                            <h4>@Model.Kullanici.Adi @Model.Kullanici.Soyadi</h4>
+                            <p>@Model.Kullanici.meslek</p>
+                            <div class="social-links">
+                                <a href="https://twitter.com/@Model.Kullanici.twitter"><i class="bi bi-twitter"></i></a>
+                                <a href="https://github.com/@Model.Kullanici.github"><i class="bi bi-github"></i></a>
+                                <a href="https://www.linkedin.com/in/@Model.Kullanici.linkedln"><i class="biu bi-linkedin"></i></a>
+                            </div>
+                            <p>
+                                @Model.Kullanici.KisacaHakkinda
+                            </p>
+
+
+
+                        </div>
+                    </div><!-- End blog author bio -->
+
+                    @Html.Partial("_Yorumlar")
+
+                    <!-- End blog comments -->
+
+                </div><!-- End blog entries list -->
+
+
+            </div>
+
+        </div>
+    </section><!-- End Blog Single Section -->
+
+</main><!-- End #main -->

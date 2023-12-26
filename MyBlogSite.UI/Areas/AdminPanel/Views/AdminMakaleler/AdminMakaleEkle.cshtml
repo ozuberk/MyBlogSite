@@ -1,0 +1,129 @@
+﻿@using MyBlogSite.DLL.Tablolar
+
+@model IEnumerable<Kategoriler>
+
+@section addTopLibrary{
+
+    <link rel="stylesheet" href="~/Areas/AdminPanel/AdminLTE/plugins/summernote/summernote-bs4.min.css">
+
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="~/AdminPanel/AdminMakaleler/AdminMakalelerIndex">Makale Listesi</a></li>
+                    <li class="breadcrumb-item active">Makale Ekle</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">MAKALE EKLE</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form id="makaleEkleForm" action="~/AdminPanel/AdminMakaleler/AdminMakaleEkle" method="post">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Makale Kategorisi</label>
+
+                                <select class="form-control" name="makaleKategori">
+                                    <option value="0" selected>Seçiniz...</option>
+                                    @foreach (var item in Model)
+                                    {
+                                        <option value="@item.KategorilerID">@item.KategoriAdi</option>
+                                    }
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Makale Başlık</label>
+                                <input type="text" name="makaleBaslik" class="form-control" id="" placeholder="Makale Başlık">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Makale İçerik</label>
+                                @*<input type="text" name="makaleKategori" class="form-control" id="" placeholder="Makale Kategorisi">*@
+                                @*<textarea rows="10"   name="icerik" class="form-control"  placeholder="Makale Kategorisi" ></textarea>*@
+                                <textarea id="makaleIcerik" name="makaleIcerik" placeholder="Makale İçerik alanı">   </textarea>
+                            </div>
+                        </div>
+
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-success">MAKALE EKLE</button>
+                        </div>
+                        <div>
+                            @Html.Raw(ViewBag.mesaj)
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section addBottomLibrary{
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/summernote/summernote-bs4.min.js"></script>
+    <script>$(function () {
+            // Summernote
+            $('#makaleIcerik').summernote()
+
+        })</script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/jquery-validation/jquery.validate.js"></script>
+    <script>$(function () {
+
+            $('#makaleEkleForm').validate({
+                rules: {
+                    makaleKategori: {
+                        required: true
+                    },
+                    makaleBaslik: {
+                        required: true
+                    },
+                    makaleIcerik: {
+                        required: true
+                    }
+
+                },
+                messages: {
+                    makaleKategori: {
+                        required: "Makale Kategori alanı zorunludur"
+                    },
+                    makaleBaslik: {
+                        required: "Başlık alanı zorunludur"
+                    },
+                    makaleIcerik: {
+                        required: "Makale İçerik alanı zorunludur"
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });</script>
+}

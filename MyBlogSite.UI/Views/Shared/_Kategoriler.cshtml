@@ -1,0 +1,14 @@
+﻿@using MyBlogSite.DLL.Tablolar 
+<div class="sidebar">
+
+    <h3 class="sidebar-title">Kategoriler</h3>
+    <div class="sidebar-item categories">
+        <ul>
+            @foreach (var item in (List<Kategoriler>)TempData["kategoriList"])
+            {
+                <li><a href="~/Makale/MakaleIndex/@item.KategorilerID">@item.KategoriAdi <span>(@item.Makaleler.Where(k=>k.AktifMi==true).Count())</span></a></li>
+
+            }
+        </ul>
+    </div><!-- End sidebar categories-->
+</div><!-- End blog sidebar -->
