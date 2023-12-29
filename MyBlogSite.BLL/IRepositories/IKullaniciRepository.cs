@@ -19,5 +19,6 @@ namespace MyBlogSite.BLL.IRepositories
 
         IEnumerable<Kullanicilar> KullaniciListesi();
         IEnumerable<Kullanicilar> KullaniciListesi(bool aktifMi);
+        Kullanicilar Giris(string kullaniciAdi, string sifre);
     }
 }

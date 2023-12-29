@@ -35,6 +35,7 @@
     * Author: BootstrapMade.com
     * License: https://bootstrapmade.com/license/
     ======================================================== -->
+    @RenderSection("menuCSS",false)
 </head>
 
 <body>
@@ -53,11 +54,16 @@
                     <li><a href="/Proje/ProjeIndex">Projelerim</a></li>
                     <li><a href="/Makale/MakaleIndex">Makaleler</a></li>
                     <li><a href="contact.html">İletişim</a></li>
+
+                    @*@RenderSection("kategoriGoster", false)*@
+                    @* false=> bütün sayfalarda kategoriGoster çağrılması zorunlu değildir analmına gelir *@
+                    @* 2. parametre için bir şey yazılmadığında default olarak true yapar. True ise RenderSection için bütün sayfalarda tanımlanması gereklidir anlamına gelir  *@
+                    @* kategoriGoster bir değişken adıdır.RenderSection ,kategoriGoster adıyla çağrıldığında burdaki alan için çağrıldığı anlamına geliyor *@
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
-        </div>
+        </div>        
     </header><!-- End Header -->
     <!-- ======= Hero Section ======= -->
     @RenderBody()
@@ -117,7 +123,7 @@
 
     <!-- Template Main JS File -->
     <script src="~/Template/assets/js/main.js"></script>
-
+    @RenderSection("menuSecimi",false)
 </body>
 
 </html>

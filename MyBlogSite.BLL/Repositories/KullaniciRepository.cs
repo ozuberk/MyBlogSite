@@ -99,5 +99,10 @@ namespace MyBlogSite.BLL.Repositories
         {
             throw new NotImplementedException();
         }
+        public Kullanicilar Giris(string kullaniciAdi, string sifre)
+        {
+            var getir = Find(k => k.KullaniciAdi == kullaniciAdi && k.KullaniciSifresi == sifre).FirstOrDefault();
+            return getir;
+        }
     }
 }

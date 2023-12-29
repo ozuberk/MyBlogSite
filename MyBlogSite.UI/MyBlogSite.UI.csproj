@@ -141,6 +141,7 @@
     <Compile Include="Areas\AdminPanel\Controllers\AdminYorumController.cs" />
     <Compile Include="Controllers\AnasayfaController.cs" />
     <Compile Include="Controllers\HakkimdaController.cs" />
+    <Compile Include="Controllers\KullaniciController.cs" />
     <Compile Include="Controllers\MakaleController.cs" />
     <Compile Include="Controllers\ProjeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -2828,6 +2829,7 @@
     <Content Include="Views\Shared\_Makaleler.cshtml" />
     <Content Include="Views\Shared\_Kategoriler.cshtml" />
     <Content Include="Views\Shared\_Yorumlar.cshtml" />
+    <Content Include="Views\Kullanici\GirisIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
