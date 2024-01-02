@@ -1,0 +1,102 @@
+﻿@model MyBlogSite.DLL.Tablolar.Kategoriler
+
+@{
+    ViewBag.Title = "AdminKategoriGuncelle";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_AdminLayoutDefault.cshtml";
+}
+
+
+@section addTopLibrary{
+
+    <link rel="stylesheet" href="~/Areas/AdminPanel/AdminLTE/plugins/summernote/summernote-bs4.min.css">
+
+}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">
+                </h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="~/AdminPanel/AdminKategori/AdminKategoriIndex">Kategoriler</a></li>
+                    <li class="breadcrumb-item active">Kategori Güncelle</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<section class="content">
+    <div class="container-fluid">
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <!-- /.card-header -->
+                    <div class="card-body">
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                <h4>Kategori Güncelle</h4>
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.KategorilerID)
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.KategoriAdi, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.KategoriAdi, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.KategoriAdi, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Aciklama, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Aciklama, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Aciklama, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.AktifMi, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.AktifMi)
+                                            @Html.ValidationMessageFor(model => model.AktifMi, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Kategori Güncelle" class="btn btn-warning" />
+                                        @Html.Raw(ViewBag.mesaj)
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <div>
+                            @Html.ActionLink("Kategorilere Geri Dön", "AdminKategoriIndex", "AdminKategori")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section addBottomLibrary{
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/summernote/summernote-bs4.min.js"></script>
+
+}
+
+

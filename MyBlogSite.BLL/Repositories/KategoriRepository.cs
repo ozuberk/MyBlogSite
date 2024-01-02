@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MyBlogSite.BLL.Repositories
 {
-    public class KategoriRepository:Repository<Kategoriler>,IKategoriRepository
+    public class KategoriRepository : Repository<Kategoriler>, IKategoriRepository
     {
         MyBlogSiteDB _db;
 
@@ -27,7 +27,8 @@ namespace MyBlogSite.BLL.Repositories
             {
                 Kategoriler kategoriEkle = new Kategoriler();
                 kategoriEkle.KategoriAdi = kategoriAdi;
-                kategoriEkle.Aciklama = aciklama;
+                kategoriEkle.Aciklama = aciklama != null ? aciklama : " ";
+                kategoriEkle.AktifMi = true;
                 Add(kategoriEkle);
                 return DefinationMessages.Ekleme_basarili.ToString();
             }
@@ -37,21 +38,23 @@ namespace MyBlogSite.BLL.Repositories
             }
         }
 
-        public string KategoriGuncelle(int kategoriID, string kategoriAdi, string aciklama,bool aktifMi)
+        public string KategoriGuncelle(int kategoriID, string kategoriAdi, string aciklama, bool aktifMi)
         {
             var kategoriGuncelle = Find(k => k.KategorilerID == kategoriID).FirstOrDefault();
             try
             {
                 kategoriGuncelle.KategoriAdi = kategoriAdi;
-                kategoriGuncelle.Aciklama = aciklama;
-                kategoriGuncelle.AktifMi= aktifMi;
-                Update(kategoriGuncelle);
-                return "Kategori ekleme başarılı";
+                kategoriGuncelle.Aciklama = aciklama != null ? aciklama : " ";
+                kategoriGuncelle.AktifMi = aktifMi;
+                //Update(kategoriGuncelle);
+                return DefinationMessages.Guncelleme_basarili.ToString();
+
 
             }
             catch (Exception)
             {
-                return "Kategori ekleme esnasında bir hata oluştu";
+                return DefinationMessages.Guncelleme_islemi_esnasında_hata_olustu.ToString();
+
             }
         }
 
@@ -72,7 +75,16 @@ namespace MyBlogSite.BLL.Repositories
 
         public string KategoriSil(int kategoriID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var pasifEt = Get(kategoriID);
+                pasifEt.AktifMi = false;
+                return DefinationMessages.Basarili.ToString();
+            }
+            catch (Exception)
+            {
+                return DefinationMessages.Basarisiz.ToString();
+            }
         }
     }
 }
