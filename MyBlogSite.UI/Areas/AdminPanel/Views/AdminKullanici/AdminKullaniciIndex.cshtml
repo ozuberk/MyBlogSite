@@ -1,8 +1,132 @@
-﻿
-@{
-    ViewBag.Title = "AdminKullaniciIndex";
-    Layout = "~/Areas/AdminPanel/Views/Shared/_AdminLayoutDefault.cshtml";
+﻿@using MyBlogSite.DLL.Tablolar
+@model List<Kullanicilar>
+
+@section addTopLibrary{
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/Areas/AdminPanel/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Areas/AdminPanel/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/Areas/AdminPanel/AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 }
 
-<h2>AdminKullaniciIndex</h2>
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">
+                    @Html.ActionLink("Kullanıcı Ekle", "AdminKullaniciEkle", "", new { @class = "btn btn-block btn-success col-md-3" })
+                </h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Kullanıcılar</a></li>
+                    <li class="breadcrumb-item active">Kullanıcı Listesi</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
 
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Adı</th>
+                                    <th>Kullanıcı Adı</th>
+                                    <th>Şifre</th>
+                                    <th>Hakkında</th>
+                                    <th>Email</th>
+                                    <th>Twitter</th>
+                                    <th>Github</th>
+                                    <th>Linkedln</th>
+                                    <th>Meslek</th>
+                                    <th>Eklenme Tarihi</th>
+                                    <th>Ülke</th>
+                                    <th>Şehir</th>
+                                    <th>Aktif Mi</th>
+                                    <th>Yazar Mı</th>
+                                    <th>Güncelle</th>
+                                    <th>Sil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.KullanicilarID</td>
+                                        <td>@item.Adi @item.Soyadi</td>                                        
+                                        <td>@item.KullaniciAdi</td>
+                                        <td>@item.KullaniciSifresi</td>
+                                        <td>@item.KisacaHakkinda</td>
+                                        <td>@item.email</td>
+                                        <td>@item.twitter</td>
+                                        <td>@item.github</td>
+                                        <td>@item.linkedln</td>
+                                        <td>@item.meslek</td>
+                                        <td>@item.EklenmeTarihi</td>
+                                        <td>@item.YasadigiUlke</td>
+                                        <td>@item.YasadigiSehir</td>
+                                        <td>@{string durum = item.AktifMi == true ? "EVET" : "HAYIR";}@durum</td>
+                                        <td>@{string yazarMi = item.Yetkiler.YetkilerID == 2 ? "EVET" : "HAYIR";}@yazarMi</td>
+                                        <th>
+                                            @*<a href='~/AdminPanel/AdminMakaleler/AdminMakaleGuncelle' class='btn btn-sm btn-warning' id="@item.MakalelerID"><i class='fas fa-pencil-alt'></i></a>*@
+                                            @Html.ActionLink("Guncelle", "AdminKullaniciGuncelle", "AdminKullanici", new { id = item.KullanicilarID }, new { @class = "btn btn-block btn-warning btn-sm" })
+
+                                        </th>
+                                        <th>
+                                            @*@Html.ActionLink("Sil", "#", "", new { @class = "btn btn-block btn-danger btn-sm" })*@
+                                            <a href='~/AdminPanel/AdminKullanici/AdminKullaniciSil/@item.KullanicilarID' class='btn btn-sm btn-danger'><i class='fas fa-trash'></i></a>
+                                        </th>
+                                    </tr>
+                                }
+
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section addBottomLibrary{
+
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/jszip/jszip.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/Areas/AdminPanel/AdminLTE/dist/js/adminlte.min.js"></script>
+
+
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });</script>
+}

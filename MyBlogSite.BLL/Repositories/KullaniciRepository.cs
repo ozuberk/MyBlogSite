@@ -39,7 +39,9 @@ namespace MyBlogSite.BLL.Repositories
                 kullaniciEkle.YasadigiSehir = sehir;
                 kullaniciEkle.KisacaHakkinda = hakkinda;
                 kullaniciEkle.AktifMi = true;
-                kullaniciEkle.Yetkiler = _db.Yetkiler.Where(y => y.YetkilerID == 2).FirstOrDefault();
+                kullaniciEkle.EklenmeTarihi=DateTime.Now;
+                kullaniciEkle.PasiflikTarihi=DateTime.Now;
+                kullaniciEkle.Yetkiler = _db.Yetkiler.Where(y => y.YetkilerID == 3).FirstOrDefault();
                 Add(kullaniciEkle);
                 return DefinationMessages.Ekleme_basarili.ToString();
             }
@@ -69,8 +71,8 @@ namespace MyBlogSite.BLL.Repositories
                 kullaniciEkle.YasadigiSehir = sehir;
                 kullaniciEkle.KisacaHakkinda = hakkinda;
                 kullaniciEkle.AktifMi = aktifMi;
-                kullaniciEkle.Yetkiler = _db.Yetkiler.Where(y => y.YetkilerID == 2).FirstOrDefault();
-                Add(kullaniciEkle);
+                kullaniciEkle.EklenmeTarihi = eklenmeTarihi!=null?eklenmeTarihi:DateTime.Now;
+                kullaniciEkle.Yetkiler = _db.Yetkiler.Where(y => y.YetkilerID == 3).FirstOrDefault();
                 return DefinationMessages.Ekleme_basarili.ToString();
             }
             catch (Exception)
@@ -82,22 +84,33 @@ namespace MyBlogSite.BLL.Repositories
 
         public IEnumerable<Kullanicilar> KullaniciListesi()
         {
-            throw new NotImplementedException();
+            return GetAll();
+
         }
 
         public IEnumerable<Kullanicilar> KullaniciListesi(bool aktifMi)
         {
-            throw new NotImplementedException();
+            return Find(k => k.AktifMi == aktifMi);
         }
 
         public int KullaniciSayisi(int kullanicilarId)
         {
-            throw new NotImplementedException();
+            return Find(k => k.KullanicilarID == kullanicilarId).Count();
         }
 
         public string KullaniciSil(int kullaniciId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var pasifEt = Get(kullaniciId);
+                pasifEt.AktifMi = false;
+                pasifEt.PasiflikTarihi=DateTime.Now;
+                return DefinationMessages.Basarili.ToString();
+            }
+            catch (Exception)
+            {
+                return DefinationMessages.Basarisiz.ToString();
+            }
         }
         public Kullanicilar Giris(string kullaniciAdi, string sifre)
         {
