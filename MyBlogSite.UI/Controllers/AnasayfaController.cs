@@ -13,10 +13,10 @@ namespace MyBlogSite.UI.Controllers
         // GET: Anasayfa
         public ActionResult AnasayfaIndex()
         {
-            //MyBlogSiteDB db = new MyBlogSiteDB();
+            MyBlogSiteDB db = new MyBlogSiteDB();
 
-            //MakaleManager makaleManager = new MakaleManager();
-            //makaleManager.MakaleListesi();
+            MakaleManager makaleManager = new MakaleManager();
+            makaleManager.MakaleListesi();
 
 
 

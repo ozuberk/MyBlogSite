@@ -5,22 +5,20 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MyBlogSite.DLL.SiteDatabase.Tablolar;
 
-namespace MyBlogSite.DLL.Tablolar
+namespace MyBlogSite.DLL.SiteDatabase.Tablolar
 {
-    public class Yetkiler
+    public class ErisimAlanlari
     {
-
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int YetkilerID { get; set; }
-
-        [StringLength(200), Required]
-        public string YetkiAdi { get; set; }
+        public int ErisimAlanlariID { get; set; }
+        [StringLength(250), Required]
+        public string ControllerAdi { get; set; }
+        [StringLength(250), Required]
+        public string ViewAdi { get; set; }
+        public string Aciklama { get; set; }
         [Required]
         public bool AktifMi { get; set; }
-
-        public virtual List<Kullanicilar> KullaniciID { get; set; }
         public virtual YetkiErisimleri YetkiErisimleri { get; set; }
     }
 }

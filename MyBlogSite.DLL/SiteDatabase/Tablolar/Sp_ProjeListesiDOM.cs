@@ -14,7 +14,6 @@ namespace MyBlogSite.DLL.SiteDatabase.Tablolar
         public string ProjeLinki { get; set; }
         public DateTime EklenmeTarihi { get; set; }
         public bool AktifMi { get; set; }
-        public string OnaylayanAdSoyad { get; set; }
-        public string YazarAdSoyad { get; set; }
+        public string ProjeSahibiAdSoyad { get; set; }
     }
 }

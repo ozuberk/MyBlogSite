@@ -9,13 +9,13 @@ namespace MyBlogSite.DLL.RepositoryManager
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        TEntity Get(int id); //Id ile data getirir
-        IEnumerable<TEntity> GetAll(); //bir tablodaki bütün dataları getirir.
-        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate); //verilen data için bulma işlemi yapar
+        TEntity Get(int id);
+        IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
         void Update(TEntity entity);
-        void Add(TEntity entity); //ekleme
-        void AddRange(IEnumerable<TEntity> entities); //toplu ekleme
-        void Remove(TEntity entity);//silme
-        void RemoveRange(IEnumerable<TEntity> entities);//Toplu silme
+        void Add(TEntity entity);
+        void AddRange(IEnumerable<TEntity> entities);
+        void Remove(TEntity entity);
+        void RemoveRange(IEnumerable<TEntity> entities);
     }
 }

@@ -13,18 +13,18 @@ namespace MyBlogSite.DLL.ORMManager
     public class MyBlogSiteDB : DbContext
     {
 
-        public DbSet<Yorumlar> Yorumlar { get; set; }
-        public DbSet<Kullanicilar> Kullanicilar { get; set; }
+        public DbSet<ErisimAlanlari> ErisimAlanlari { get; set; }
         public DbSet<Kategoriler> MakaleKategorileri { get; set; }
+        public DbSet<Kullanicilar> Kullanicilar { get; set; }
         public DbSet<Makaleler> Makaleler { get; set; }
         public DbSet<Menu> Menu { get; set; }
-        public DbSet<Resimler> Resimler { get; set; }
-        public DbSet<Yetkiler> Yetkiler { get; set; }
         public DbSet<Projeler> Projeler { get; set; }
+        public DbSet<Resimler> Resimler { get; set; }
+        public DbSet<YetkiErisimleri> YetkiErisimleri { get; set; }
+        public DbSet<Yetkiler> Yetkiler { get; set; }
+        public DbSet<Yorumlar> Yorumlar { get; set; }
 
-        /// <summary>
-        /// Db de olan Sp_MakaleListesi adlı Spyi çağırır.
-        /// </summary>
+        
         public IEnumerable<Sp_MakaleListesiDOM> Sp_MakaleListesi()
         {
             var getSp = Database.SqlQuery<Sp_MakaleListesiDOM>("EXEC Sp_MakaleListesi");
@@ -33,6 +33,16 @@ namespace MyBlogSite.DLL.ORMManager
         public IEnumerable<Sp_ProjeListesiDOM> Sp_ProjeListesi()
         {
             var getSp = Database.SqlQuery<Sp_ProjeListesiDOM>("EXEC Sp_ProjeListesi");
+            return getSp.ToList();
+        }
+        public IEnumerable<Sp_YorumListesiDOM> Sp_YorumListesi()
+        {
+            var getSp = Database.SqlQuery<Sp_YorumListesiDOM>("EXEC Sp_YorumListesi");
+            return getSp.ToList();
+        }
+        public IEnumerable<Sp_YetkiErisimListesiDOM> Sp_YetkiErisimListesi()
+        {
+            var getSp = Database.SqlQuery<Sp_YetkiErisimListesiDOM>("EXEC Sp_YetkiErisimListesi");
             return getSp.ToList();
         }
 
