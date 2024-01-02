@@ -22,16 +22,17 @@ namespace MyBlogSite.BLL.Repositories
             _db = context;
         }
 
-        public string ProjeEkle(int yazarId, int kategoriId, string projeAdi, string projeLinki)
+        public string ProjeEkle(int kullaniciId, int kategoriId, string projeAdi, string projeLinki)
         {
             try
             {
                 Projeler projeEkle = new Projeler();
                 projeEkle.ProjeKategorileri = _db.MakaleKategorileri.Where(k => k.KategorilerID == kategoriId).FirstOrDefault();
+                projeEkle.Kullanicilar = _db.Kullanicilar.Where(k => k.KullanicilarID == kullaniciId).FirstOrDefault();
                 projeEkle.EklenmeTarihi = DateTime.Now;
                 projeEkle.ProjeAdi = projeAdi;
                 projeEkle.ProjeLinki = projeLinki;
-                projeEkle.AktifMi = false;
+                projeEkle.AktifMi = true;
                 Add(projeEkle);
 
                 return DefinationMessages.Ekleme_basarili.ToString();
@@ -42,23 +43,24 @@ namespace MyBlogSite.BLL.Repositories
             }
         }
 
-        public string ProjeGuncelle(int projeId, int yazarId, int kategoriId, string projeAdi, string projeLinki, bool aktifMi, int onaylayanKullaniciId)
+        public string ProjeGuncelle(int projeId, int kullaniciId, int kategoriId, string projeAdi, string projeLinki, bool aktifMi)
         {
             var projeGuncelle = Find(k => k.ProjelerID == projeId).FirstOrDefault();
             try
             {
                 projeGuncelle.ProjeKategorileri = _db.MakaleKategorileri.Where(k => k.KategorilerID == kategoriId).FirstOrDefault();
+                projeGuncelle.Kullanicilar = _db.Kullanicilar.Where(k => k.KullanicilarID == kullaniciId).FirstOrDefault();
                 projeGuncelle.EklenmeTarihi = DateTime.Now;
                 projeGuncelle.ProjeAdi = projeAdi;
                 projeGuncelle.ProjeLinki = projeLinki;
                 projeGuncelle.AktifMi = aktifMi;
-                Update(projeGuncelle);//????
+                //Update(projeGuncelle);//????
 
-                return "Güncelleme başarılı";
+                return DefinationMessages.Guncelleme_basarili.ToString();
             }
             catch (Exception)
             {
-                return "Güncelleme işlemi esnasında hata oluştu";
+                return DefinationMessages.Guncelleme_islemi_esnasında_hata_olustu.ToString();
             }
         }
 
@@ -74,7 +76,16 @@ namespace MyBlogSite.BLL.Repositories
 
         public string ProjeSil(int projeId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var pasifEt = Get(projeId);
+                pasifEt.AktifMi = false;
+                return DefinationMessages.Basarili.ToString();
+            }
+            catch (Exception)
+            {
+                return DefinationMessages.Basarisiz.ToString();
+            }
         }
 
         public IEnumerable<Sp_ProjeListesiDOM> Sp_ProjeListesi()
