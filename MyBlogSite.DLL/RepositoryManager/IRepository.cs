@@ -10,7 +10,7 @@ namespace MyBlogSite.DLL.RepositoryManager
     public interface IRepository<TEntity> where TEntity : class
     {
         TEntity Get(int id);
-        IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null);
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
         void Update(TEntity entity);
         void Add(TEntity entity);

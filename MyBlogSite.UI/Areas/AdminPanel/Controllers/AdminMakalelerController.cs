@@ -34,7 +34,7 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
         {
             //MakaleManager makale=new MakaleManager();
             //var list = makale.MakaleListesi();
-            return View(_makaleRepo.Sp_MakaleListesi()); //sp oluştuktan sonra hata vermeyecek.
+            return View(_makaleRepo.Sp_MakaleListesi(true)); //sp oluştuktan sonra hata vermeyecek.
         }
         [HttpGet]
         public ActionResult AdminMakaleEkle()
@@ -46,7 +46,7 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
         public ActionResult AdminMakaleEkle(string makaleKategori,string makaleBaslik,string makaleIcerik)
         {
             var kategoriList = _kategoriRepo.KategoriListele();
-            var ekle = _makaleRepo.MakaleEkle(1, Convert.ToInt32(makaleKategori), makaleBaslik, makaleIcerik);
+            var ekle = _makaleRepo.MakaleEkle(2, Convert.ToInt32(makaleKategori), makaleBaslik, makaleIcerik);
 
             if (ekle == DefinationMessages.Ekleme_islemi_esnasında_hata_olustu.ToString())
             {

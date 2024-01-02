@@ -34,9 +34,11 @@ namespace MyBlogSite.DLL.RepositoryManager
         {
             return Context.Set<TEntity>().Find(id);
         }
-        public IEnumerable<TEntity> GetAll()
+        public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
-            return Context.Set<TEntity>().ToList();
+            return filter == null
+                ? Context.Set<TEntity>().ToList()
+                : Context.Set<TEntity>().Where(filter).ToList();
         }
         public void Remove(TEntity entity)
         {
