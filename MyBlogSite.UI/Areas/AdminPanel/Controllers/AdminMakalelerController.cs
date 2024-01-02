@@ -34,7 +34,7 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
         {
             //MakaleManager makale=new MakaleManager();
             //var list = makale.MakaleListesi();
-            return View(_makaleRepo.Sp_MakaleListesi(true)); //sp oluştuktan sonra hata vermeyecek.
+            return View(_makaleRepo.Sp_MakaleListesi()); //sp oluştuktan sonra hata vermeyecek.
         }
         [HttpGet]
         public ActionResult AdminMakaleEkle()

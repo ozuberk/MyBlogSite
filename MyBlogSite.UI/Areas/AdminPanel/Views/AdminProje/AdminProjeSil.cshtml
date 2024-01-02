@@ -1,7 +1,8 @@
-﻿@model MyBlogSite.DLL.Tablolar.Makaleler
+﻿@model MyBlogSite.DLL.Tablolar.Projeler
+
 
 @{
-    ViewBag.Title = "AdminMakaleSil";
+    ViewBag.Title = "AdminProjeSil";
     Layout = "~/Areas/AdminPanel/Views/Shared/_AdminLayoutDefault.cshtml";
 }
 
@@ -19,10 +20,10 @@
                             @Html.AntiForgeryToken()
 
                             <div class="form-horizontal">
-                                <h4>Makaleler</h4>
+                                <h4>Projeler</h4>
                                 <hr />
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                @Html.HiddenFor(model => model.MakalelerID)
+                                @Html.HiddenFor(model => model.ProjelerID)
 
 
 
@@ -45,7 +46,7 @@
                         }
 
                         <div>
-                            @Html.ActionLink("Makalelere Geri Dön", "AdminMakalelerIndex", "AdminMakaleler")
+                            @Html.ActionLink("Projelere Geri Dön", "AdminProjeIndex", "AdminProje")
                         </div>
                     </div>
                 </div>
@@ -53,3 +54,5 @@
         </div>
     </div>
 </section>
+
+

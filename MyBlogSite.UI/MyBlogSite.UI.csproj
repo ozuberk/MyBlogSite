@@ -2638,6 +2638,7 @@
     <Content Include="Views\Shared\_Yazarlar.cshtml" />
     <Content Include="Areas\AdminPanel\Views\AdminProje\AdminProjeEkle.cshtml" />
     <Content Include="Areas\AdminPanel\Views\AdminProje\AdminProjeGuncelle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\AdminProje\AdminProjeSil.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
