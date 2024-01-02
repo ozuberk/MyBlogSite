@@ -11,8 +11,8 @@ namespace MyBlogSite.BLL.IRepositories
 {
     public interface IProjeRepository :IRepository<Projeler>
     {
-        string ProjeEkle(int yazarId,int kategoriId,string projeAdi,string projeLinki);
-        string ProjeGuncelle(int projeId,int yazarId, int kategoriId, string projeAdi, string projeLinki, bool aktifMi, int onaylayanKullaniciId);
+        string ProjeEkle(int kullaniciId,int kategoriId,string projeAdi,string projeLinki);
+        string ProjeGuncelle(int projeId,int kullaniciId, int kategoriId, string projeAdi, string projeLinki, bool aktifMi);
         string ProjeSil(int projeId);
         IEnumerable<Projeler> ProjeListesi();
         IEnumerable<Projeler> ProjeListesi(bool aktifMi);
