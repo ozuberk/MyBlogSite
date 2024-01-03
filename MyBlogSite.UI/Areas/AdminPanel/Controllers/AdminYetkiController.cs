@@ -24,7 +24,7 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
         public AdminYetkiController()
         {
             _db = new MyBlogSiteDB();
-            _yetkiRepo=new YetkiRepository(_db);
+            _yetkiRepo = new YetkiRepository(_db);
             _yetkiErisimRepo = new YetkiErisimRepository(_db);
             _sayfalarRepo = new ErisimAlanlariRepository(_db);
             _unitOfWork = new UnitOfWork(_db);
@@ -58,7 +58,7 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
         }
         [ValidateInput(false), HttpPost]
 
-        public ActionResult AdminYetkiEkle(string yetkiAdi)
+        public ActionResult AdminYetkiEkle(string yetkiAdi, string aciklama, int[] selectedSayfalar)
         {
             var sayfaList = _sayfalarRepo.SayfaListesi();
             var yetkiList = _yetkiRepo.YetkiListesi();
@@ -70,26 +70,58 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
                 SayfaList = sayfaList.ToList(),
                 ErisimList = erisimList.ToList()
             };
-            var erisimEkle = _yetkiErisimRepo.YetkiErisimEkle(yetkiAdi);
+
+            var erisimEkle = _yetkiErisimRepo.YetkiErisimEkle(aciklama);
             if (erisimEkle == DefinationMessages.Ekleme_islemi_esnasında_hata_olustu.ToString())
             {
                 ViewBag.mesaj = uyariMesaj.Hatali(erisimEkle);
                 return View(viewModel);
             }
             int kaydet = _unitOfWork.SaveChanges();
-            var erisimIdBul = _yetkiErisimRepo.Get2(y => y.Aciklama == yetkiAdi);
+
+            var erisimIdBul = _yetkiErisimRepo.Get2(y => y.Aciklama == aciklama);
             var ekle = _yetkiRepo.YetkiEkle(yetkiAdi, erisimIdBul.YetkiErisimleriID);
             if (ekle == DefinationMessages.Ekleme_islemi_esnasında_hata_olustu.ToString())
             {
                 ViewBag.mesaj = uyariMesaj.Hatali(ekle);
                 return View(viewModel);
             }
+            foreach (var item in selectedSayfalar)
+            {
+                var sayfa = _sayfalarRepo.Get(item);
+                var sayfaEkle = _sayfalarRepo.SayfaEkle(sayfa.ControllerAdi, sayfa.ViewAdi, erisimIdBul.YetkiErisimleriID);
+            }
             kaydet = _unitOfWork.SaveChanges();
+            if (kaydet <= (int)DefinationMessages.Basarisiz)
+            {
+                ViewBag.mesaj = uyariMesaj.Hatali(DefinationMessages.Eklenirken_Hata_Olustu.ToString());
+                return View(viewModel);
+            }
+            ViewBag.mesaj = uyariMesaj.Basarili(DefinationMessages.Ekleme_basarili.ToString()); ;
+            return View(viewModel);
 
         }
 
+        public ActionResult AdminYetkiGuncelle(int id)
+        {
 
+            var yetkiBul = _yetkiRepo.Get(id);
+            var erisimList = _yetkiErisimRepo.Sp_YetkiErisimListesi(id).ToList();
 
+            var viewModel = new AnasayfaViewToplu
+            {
+                YetkiID = yetkiBul,
+                ErisimList2 = erisimList
+            };
+            return View(viewModel);
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult AdminYetkiGuncelle(int id, string yetkiAdi, bool aktifMi)
+        {
+            var yetkiBul = _yetkiRepo.Get(id);
+            return View(yetkiBul);
+
+        }
 
 
 

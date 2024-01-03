@@ -1,5 +1,4 @@
-﻿
-
+﻿@model MyBlogSite.UI.Areas.AdminPanel.Controllers.AnasayfaViewToplu
 
 <section class="content">
     <div class="container-fluid">
@@ -18,29 +17,35 @@
 
                             <div class="form-group">
                                 <label>Yetki Adı</label>
-                                <input type="text" name="makaleBaslik" class="form-control" id="" placeholder="">
+                                <input type="text" name="yetkiAdi" class="form-control" id="" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label>Erişim Açıklaması</label>
+                                <input type="text" name="aciklama" class="form-control" id="" placeholder="">
                             </div>
                         </div>
 
                         <div class="card card-info card-outline">
                             <div class="card-header">
-                                <h5 class="card-title">Görülebilir Alanlar</h5>
+                                <h5 class="card-title">Erişim Alanları</h5>
                             </div>
                             <div class="card-body">
-                                <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" id="customCheckbox1" disabled>
-                                    <label for="customCheckbox1" class="custom-control-label">Bütün alanları verecek görebildikleri işaretli olacak</label>
-                                </div>
+                                @foreach (var item in Model.SayfaList)
+                                {
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="customCheckbox_@item.ErisimAlanlariID" name="selectedSayfalar" value="@item.ErisimAlanlariID">
+                                        <label for="customCheckbox_@item.ErisimAlanlariID" class="custom-control-label">@item.ControllerAdi</label>
+                                    </div>
+                                }
                             </div>
                         </div>
-
 
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success">MAKALE EKLE</button>
+                            <button type="submit" class="btn btn-success">YETKİ EKLE</button>
                         </div>
                         <div>
-                            <!--@Html.Raw(ViewBag.mesaj)-->
+                            @Html.Raw(ViewBag.mesaj)
                         </div>
                     </form>
                 </div>
@@ -48,3 +53,4 @@
         </div>
     </div>
 </section>
+
