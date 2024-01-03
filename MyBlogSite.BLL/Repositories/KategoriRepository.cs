@@ -46,7 +46,7 @@ namespace MyBlogSite.BLL.Repositories
                 kategoriGuncelle.KategoriAdi = kategoriAdi;
                 kategoriGuncelle.Aciklama = aciklama != null ? aciklama : " ";
                 kategoriGuncelle.AktifMi = aktifMi;
-                //Update(kategoriGuncelle);
+                //Update(kategoriGuncelle)s;
                 return DefinationMessages.Guncelleme_basarili.ToString();
 
 

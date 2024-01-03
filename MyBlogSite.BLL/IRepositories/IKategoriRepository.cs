@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace MyBlogSite.BLL.IRepositories
 {
     public interface IKategoriRepository :IRepository<Kategoriler>
-    {
+    {//
         int KategoriSayisi(int kategoriID);
         string KategoriEkle(string kategoriAdi, string aciklama);
         string KategoriGuncelle(int kategoriID, string kategoriAdi, string aciklama,bool aktifMi);

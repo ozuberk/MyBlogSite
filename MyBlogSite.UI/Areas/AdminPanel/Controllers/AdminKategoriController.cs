@@ -25,7 +25,7 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
             _kategoriRepo = new KategoriRepository(_db);
             _unitOfWork = new UnitOfWork(_db);
         }
-        // GET: AdminPanel/AdminKategori
+        // GET: AdminPanel/AdminKategoris
         public ActionResult AdminKategoriIndex()
         {
             return View(_kategoriRepo.KategoriListele());
