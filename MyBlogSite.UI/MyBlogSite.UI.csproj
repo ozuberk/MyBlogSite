@@ -2642,6 +2642,8 @@
     <Content Include="Areas\AdminPanel\Views\AdminKullanici\AdminKullaniciEkle.cshtml" />
     <Content Include="Areas\AdminPanel\Views\AdminKullanici\AdminKullaniciGuncelle.cshtml" />
     <Content Include="Areas\AdminPanel\Views\AdminKullanici\AdminKullaniciSil.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\AdminYorum\AdminYorumGuncelle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\AdminYorum\AdminYorumSil.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />

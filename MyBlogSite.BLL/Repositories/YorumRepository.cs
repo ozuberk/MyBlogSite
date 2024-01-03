@@ -1,4 +1,5 @@
 ﻿using MyBlogSite.BLL.IRepositories;
+using MyBlogSite.DLL.Enum;
 using MyBlogSite.DLL.ORMManager;
 using MyBlogSite.DLL.RepositoryManager;
 using MyBlogSite.DLL.SiteDatabase.Tablolar;
@@ -27,7 +28,7 @@ namespace MyBlogSite.BLL.Repositories
 
         public IEnumerable<Sp_YorumListesiDOM> MakaleAltYorumlari(int makaleID)
         {
-            var getir = _db.Sp_YorumListesi().Where(k => k.YorumUstID != 0 && k.Makaleler_MakalelerID == makaleID).ToList();
+            var getir = _db.Sp_YorumListesi().Where(k => k.YorumUstId != 0 && k.Makaleler_MakalelerID == makaleID).ToList();
             return getir;
         }
 
@@ -49,7 +50,7 @@ namespace MyBlogSite.BLL.Repositories
 
         }
 
-     
+
 
 
         public IEnumerable<Sp_YorumListesiDOM> Sp_YorumListesi()
@@ -60,7 +61,7 @@ namespace MyBlogSite.BLL.Repositories
 
         public IEnumerable<Sp_YorumListesiDOM> Sp_YorumListesi(bool aktifMi)
         {
-            
+
             var getSP = _db.Sp_YorumListesi().Where(k => k.AktifMi == aktifMi).ToList();
             return getSP;
         }
@@ -86,18 +87,15 @@ namespace MyBlogSite.BLL.Repositories
             }
         }
 
-        public string YorumGuncelle(int yorumlarID, string yorum, int yorumUstId, int kullaniciID, int makalelerID)
+        public string YorumGuncelle(int yorumlarID, string yorum, bool aktifMi)
         {
             var yorumGuncelle = Find(y => y.YorumlarID == yorumlarID).FirstOrDefault();
             try
             {
                 yorumGuncelle.Yorum = yorum;
                 yorumGuncelle.YorumTarihi = DateTime.Now;
-                yorumGuncelle.YorumUstId = yorumUstId;
-                yorumGuncelle.Kullanicilar = _db.Kullanicilar.Where(k => k.KullanicilarID == kullaniciID).FirstOrDefault();
-                yorumGuncelle.Makaleler = _db.Makaleler.Where(k => k.MakalelerID == makalelerID).FirstOrDefault();
-
-                Update(yorumGuncelle);
+                yorumGuncelle.AktifMi = aktifMi;
+                //Update(yorumGuncelle);
                 return "Güncelleme Başarılı";
             }
             catch (Exception)
@@ -118,7 +116,16 @@ namespace MyBlogSite.BLL.Repositories
 
         public string YorumSil(int yorumlarID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var pasifEt = Get(yorumlarID);
+                pasifEt.AktifMi = false;
+                return DefinationMessages.Basarili.ToString();
+            }
+            catch (Exception)
+            {
+                return DefinationMessages.Basarisiz.ToString();
+            }
         }
     }
 }

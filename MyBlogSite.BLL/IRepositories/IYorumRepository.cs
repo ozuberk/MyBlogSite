@@ -12,21 +12,17 @@ namespace MyBlogSite.BLL.IRepositories
     public interface IYorumRepository:IRepository<Yorumlar>
     {
         int MakaleYorumSayisi(int makaleID);
-        int ProjeYorumSayisi(int projeID);
         int AltYorumSayisi(int yorumID);
         string YorumEkle(string yorum,int yorumUstId,int kullaniciID,int makalelerID);
-        string YorumGuncelle(int yorumlarID,string yorum,int yorumUstId,int kullaniciID,int makalelerID);
+        string YorumGuncelle(int yorumlarID,string yorum,bool aktifMi);
         string YorumSil(int yorumlarID);
         IEnumerable<Yorumlar> YorumListesi();
         IEnumerable<Yorumlar> YorumListesi(bool aktifMi);
         IEnumerable<Yorumlar> MakaleYorumListesi(int makaleID);
-        IEnumerable<Yorumlar> ProjeYorumListesi(int projeID);
         IEnumerable<Sp_YorumListesiDOM> Sp_YorumListesi();
         IEnumerable<Sp_YorumListesiDOM> Sp_YorumListesi(bool aktifMi);
         IEnumerable<Sp_YorumListesiDOM> MakaleYorumlari(int makaleID);
         IEnumerable<Sp_YorumListesiDOM> MakaleAltYorumlari(int makaleID);
-        IEnumerable<Sp_YorumListesiDOM> ProjeYorumlari(int projeID);
-        IEnumerable<Sp_YorumListesiDOM> ProjeAltYorumlari(int projeID);
 
     }
 }

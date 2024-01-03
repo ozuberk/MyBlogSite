@@ -15,7 +15,7 @@ namespace MyBlogSite.DLL.SiteDatabase.Tablolar
         public string Soyadi { get; set; }
         public bool AktifMi { get; set; }
         public string Yorum { get; set; }
-        public int YorumUstID { get; set; }
+        public int YorumUstId { get; set; }
         public DateTime YorumTarihi { get; set; }
     }
 }
