@@ -1,4 +1,5 @@
 ﻿using MyBlogSite.DLL.RepositoryManager;
+using MyBlogSite.DLL.SiteDatabase.Tablolar;
 using MyBlogSite.DLL.Tablolar;
 using System;
 using System.Collections.Generic;
@@ -20,5 +21,12 @@ namespace MyBlogSite.BLL.IRepositories
         IEnumerable<Yorumlar> YorumListesi(bool aktifMi);
         IEnumerable<Yorumlar> MakaleYorumListesi(int makaleID);
         IEnumerable<Yorumlar> ProjeYorumListesi(int projeID);
+        IEnumerable<Sp_YorumListesiDOM> Sp_YorumListesi();
+        IEnumerable<Sp_YorumListesiDOM> Sp_YorumListesi(bool aktifMi);
+        IEnumerable<Sp_YorumListesiDOM> MakaleYorumlari(int makaleID);
+        IEnumerable<Sp_YorumListesiDOM> MakaleAltYorumlari(int makaleID);
+        IEnumerable<Sp_YorumListesiDOM> ProjeYorumlari(int projeID);
+        IEnumerable<Sp_YorumListesiDOM> ProjeAltYorumlari(int projeID);
+
     }
 }

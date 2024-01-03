@@ -1,6 +1,7 @@
 ﻿using MyBlogSite.BLL.IRepositories;
 using MyBlogSite.DLL.ORMManager;
 using MyBlogSite.DLL.RepositoryManager;
+using MyBlogSite.DLL.SiteDatabase.Tablolar;
 using MyBlogSite.DLL.Tablolar;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,18 @@ namespace MyBlogSite.BLL.Repositories
             return Find(y => y.YorumlarID == yorumID).Count();
         }
 
+        public IEnumerable<Sp_YorumListesiDOM> MakaleAltYorumlari(int makaleID)
+        {
+            var getir = _db.Sp_YorumListesi().Where(k => k.YorumUstID != 0 && k.Makaleler_MakalelerID == makaleID).ToList();
+            return getir;
+        }
+
+        public IEnumerable<Sp_YorumListesiDOM> MakaleYorumlari(int makaleID)
+        {
+            var getir = _db.Sp_YorumListesi().Where(k => k.Makaleler_MakalelerID == makaleID).ToList();
+            return getir;
+        }
+
         public IEnumerable<Yorumlar> MakaleYorumListesi(int makaleID)
         {
             var getir = Find(k => k.Makaleler.MakalelerID == makaleID);
@@ -36,16 +49,23 @@ namespace MyBlogSite.BLL.Repositories
 
         }
 
-        public IEnumerable<Yorumlar> ProjeYorumListesi(int projeID)
+     
+
+
+        public IEnumerable<Sp_YorumListesiDOM> Sp_YorumListesi()
         {
-            var getir = Find(k => k.Projeler.ProjelerID == projeID);
-            return getir;
+            var getSP = _db.Sp_YorumListesi().ToList();
+            return getSP;
         }
 
-        public int ProjeYorumSayisi(int projeID)
+        public IEnumerable<Sp_YorumListesiDOM> Sp_YorumListesi(bool aktifMi)
         {
-            return Find(y => y.Projeler.ProjelerID == projeID).Count();
+            
+            var getSP = _db.Sp_YorumListesi().Where(k => k.AktifMi == aktifMi).ToList();
+            return getSP;
         }
+
+
 
         public string YorumEkle(string yorum, int yorumUstId, int kullaniciID, int makalelerID)
         {
