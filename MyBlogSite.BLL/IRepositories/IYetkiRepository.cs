@@ -11,7 +11,7 @@ namespace MyBlogSite.BLL.IRepositories
     public interface IYetkiRepository:IRepository<Yetkiler>
     {
         int YetkiSayisi(int yetkiId);
-        string YetkiEkle(string yetkiAdi);
+        string YetkiEkle(string yetkiAdi,int erisimID);
         string YetkiGuncelle(int yetkiId, string yetkiAdi,bool aktifMi);
         string YetkiSil(int yetkiId);
         IEnumerable<Yetkiler> YetkiListesi();

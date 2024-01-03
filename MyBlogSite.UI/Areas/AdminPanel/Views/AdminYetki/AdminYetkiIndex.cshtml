@@ -1,10 +1,11 @@
-﻿@using MyBlogSite.DLL.Tablolar
-@model List<Yetkiler>
+﻿@using MyBlogSite.DLL.SiteDatabase
+@model MyBlogSite.UI.Areas.AdminPanel.Controllers.AnasayfaViewToplu
+
 <section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <a href='~/AdminPanel/AdminYetki/AdminYetkiEkle' class="btn btn-primary btn-block mb-3">Yetki Ekle</a>
+                <a href='~/AdminPanel/AdminYetkiler/AdminYetkiEkle' class="btn btn-primary btn-block mb-3">Yetki Ekle</a>
 
                 <div class="card">
                     <div class="card-header">
@@ -20,7 +21,7 @@
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item active">
 
-                                @foreach (var item in Model)
+                                @foreach (var item in Model.YetkiList)
                                 {
                                     <a href="#" class="nav-link">
                                         <i class=""></i> @item.YetkiAdi
@@ -41,10 +42,14 @@
                         <h5 class="card-title">Görülebilir Alanlar</h5>
                     </div>
                     <div class="card-body">
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="customCheckbox1" disabled>
-                            <label for="customCheckbox1" class="custom-control-label">Bütün alanları verecek görebildikleri işaretli olacak</label>
-                        </div>
+                        @foreach (var item in Model.SayfaList)
+                        {
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" id="customCheckbox(@item.ErisimAlanlariID)" disabled>
+                                <label for="customCheckbox(@item.ErisimAlanlariID)" class="custom-control-label">@item.ControllerAdi</label>
+                            </div>
+                        }
+
                     </div>
                 </div>
 

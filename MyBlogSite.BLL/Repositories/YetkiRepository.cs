@@ -2,6 +2,7 @@
 using MyBlogSite.DLL.Enum;
 using MyBlogSite.DLL.ORMManager;
 using MyBlogSite.DLL.RepositoryManager;
+using MyBlogSite.DLL.SiteDatabase.Tablolar;
 using MyBlogSite.DLL.Tablolar;
 using System;
 using System.Collections.Generic;
@@ -20,12 +21,17 @@ namespace MyBlogSite.BLL.Repositories
             _db = context;
         }
 
-        public string YetkiEkle(string yetkiAdi)
+        public string YetkiEkle(string yetkiAdi, int erisimID)
         {
             try
             {
+                YetkiErisimleri yetkiErisimSayfalari = new YetkiErisimleri { YetkiErisimleriID = erisimID };
+
                 Yetkiler yetkiEkle = new Yetkiler();
                 yetkiEkle.YetkiAdi= yetkiAdi;
+                yetkiEkle.AktifMi = true;
+                yetkiEkle.YetkiErisimleri = yetkiErisimSayfalari;
+
                 Add(yetkiEkle);
                 return DefinationMessages.Ekleme_basarili.ToString();
             }
@@ -43,13 +49,13 @@ namespace MyBlogSite.BLL.Repositories
             {
                 yetkiGuncelle.YetkiAdi = yetkiAdi;
                 yetkiGuncelle.AktifMi= aktifMi;
-                Update(yetkiGuncelle);
-                return "Güncelleme başarılı";
+                //Update(yetkiGuncelle);
+                return DefinationMessages.Guncelleme_basarili.ToString();
 
             }
             catch (Exception)
             {
-                return "Güncelleme işlemi esnasında hata oluştu";
+                return DefinationMessages.Guncelleme_islemi_esnasında_hata_olustu.ToString();
 
             }
         }
@@ -72,7 +78,16 @@ namespace MyBlogSite.BLL.Repositories
 
         public string YetkiSil(int yetkiId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var pasitEt = Get(yetkiId);
+                pasitEt.AktifMi = false;
+                return DefinationMessages.Pasif_Basarili.ToString();
+            }
+            catch (Exception)
+            {
+                return DefinationMessages.Pasif_Edilirken_Hata_Olustu.ToString();
+            }
         }
     }
 }

@@ -56,22 +56,26 @@
   <ItemGroup>
     <Compile Include="FakeDataManager\KullaniciFakeData.cs" />
     <Compile Include="FakeDataManager\MakaleFakeData.cs" />
+    <Compile Include="IRepositories\IErisimAlanlari.cs" />
     <Compile Include="IRepositories\IKategoriRepository.cs" />
     <Compile Include="IRepositories\IKullaniciRepository.cs" />
     <Compile Include="IRepositories\IMenuRepository.cs" />
     <Compile Include="IRepositories\IProjeRepository.cs" />
     <Compile Include="IRepositories\IResimRepository.cs" />
+    <Compile Include="IRepositories\IYetkiErisimRepository.cs" />
     <Compile Include="IRepositories\IYetkiRepository.cs" />
     <Compile Include="Manager\MakaleManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IRepositories\IMakaleRepository.cs" />
     <Compile Include="IRepositories\IYorumRepository.cs" />
+    <Compile Include="Repositories\ErisimAlanlariRepository.cs" />
     <Compile Include="Repositories\KategoriRepository.cs" />
     <Compile Include="Repositories\KullaniciRepository.cs" />
     <Compile Include="Repositories\MakaleRepository.cs" />
     <Compile Include="Repositories\MenuRepository.cs" />
     <Compile Include="Repositories\ProjeRepository.cs" />
     <Compile Include="Repositories\ResimRepository.cs" />
+    <Compile Include="Repositories\YetkiErisimRepository.cs" />
     <Compile Include="Repositories\YetkiRepository.cs" />
     <Compile Include="Repositories\YorumRepository.cs" />
   </ItemGroup>

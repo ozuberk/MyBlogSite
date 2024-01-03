@@ -34,6 +34,10 @@ namespace MyBlogSite.DLL.RepositoryManager
         {
             return Context.Set<TEntity>().Find(id);
         }
+        public TEntity Get2(Expression<Func<TEntity, bool>> filter)
+        {
+            return Context.Set<TEntity>().SingleOrDefault(filter);
+        }
         public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
             return filter == null
