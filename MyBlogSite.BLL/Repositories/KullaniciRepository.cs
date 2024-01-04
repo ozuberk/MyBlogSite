@@ -97,7 +97,7 @@ namespace MyBlogSite.BLL.Repositories
         {
             return Find(k => k.KullanicilarID == kullanicilarId).Count();
         }
-
+       
         public string KullaniciSil(int kullaniciId)
         {
             try
