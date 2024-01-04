@@ -1,0 +1,49 @@
+﻿@model MyBlogSite.UI.Areas.AdminPanel.Controllers.AnasayfaViewToplu
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">YETKİ EKLE</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form id="yetkiEkleForm" action="~/AdminPanel/AdminYetki/AdminSayfaEkle" method="post">
+                        <div class="card-body">
+
+
+                            <div class="card card-info card-outline">
+                                <div class="card-header">
+                                    <h5 class="card-title">Erişim Alanları @Model.erisimIDd.YetkiErisimleriID</h5>
+                                </div>
+                                <div class="card-body">
+                                    @foreach (var item in Model.SayfaList)
+                                    {
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" id="customCheckbox_@item.ErisimAlanlariID" name="selectedSayfalar" value="@item.ErisimAlanlariID">
+                                            <label for="customCheckbox_@item.ErisimAlanlariID" class="custom-control-label">@item.ControllerAdi</label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-success">ERİŞİM EKLE</button>
+                        </div>
+                        <div>
+                            @Html.Raw(ViewBag.mesaj)
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

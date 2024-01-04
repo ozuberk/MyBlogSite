@@ -58,7 +58,7 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
         }
         [ValidateInput(false), HttpPost]
 
-        public ActionResult AdminYetkiEkle(string yetkiAdi, string aciklama, int[] selectedSayfalar)
+        public ActionResult AdminYetkiEkle(string yetkiAdi, string aciklama)
         {
             var sayfaList = _sayfalarRepo.SayfaListesi();
             var yetkiList = _yetkiRepo.YetkiListesi();
@@ -86,10 +86,10 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
                 ViewBag.mesaj = uyariMesaj.Hatali(ekle);
                 return View(viewModel);
             }
-            foreach (var item in selectedSayfalar)
+            int erisimId = erisimIdBul.YetkiErisimleriID;
+            foreach (var item in sayfaList)
             {
-                var sayfa = _sayfalarRepo.Get(item);
-                var sayfaEkle = _sayfalarRepo.SayfaEkle(sayfa.ControllerAdi, sayfa.ViewAdi, erisimIdBul.YetkiErisimleriID);
+                var sayfaEkle = _sayfalarRepo.SayfaEkle(item.ControllerAdi, item.ViewAdi, erisimId);
             }
             kaydet = _unitOfWork.SaveChanges();
             if (kaydet <= (int)DefinationMessages.Basarisiz)
@@ -97,12 +97,71 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
                 ViewBag.mesaj = uyariMesaj.Hatali(DefinationMessages.Eklenirken_Hata_Olustu.ToString());
                 return View(viewModel);
             }
-            ViewBag.mesaj = uyariMesaj.Basarili(DefinationMessages.Ekleme_basarili.ToString()); ;
-            return View(viewModel);
+            ViewBag.mesaj = uyariMesaj.Basarili(DefinationMessages.Ekleme_basarili.ToString());
+            return RedirectToAction("AdminSayfaEkle", new { id = erisimId });
+            //return View(viewModel);
 
         }
 
-        public ActionResult AdminYetkiGuncelle(int id)
+        [HttpGet]
+        public ActionResult AdminSayfaEkle(int id = 44)
+        {
+            var sayfaList = _sayfalarRepo.SayfaListesi();
+            var yetkiList = _yetkiRepo.YetkiListesi();
+            var erisimList = _yetkiErisimRepo.YetkiErisimListesi();
+            var erisimID = _yetkiErisimRepo.Get(id);
+
+            var viewModel = new AnasayfaViewToplu
+            {
+                YetkiList = yetkiList.ToList(),
+                SayfaList = sayfaList.ToList(),
+                ErisimList = erisimList.ToList(),
+                erisimIDd = erisimID
+            };
+
+            var sayfaBul = _sayfalarRepo.Find(k => k.YetkiErisimleri.YetkiErisimleriID == id);
+            return View(viewModel);
+        }
+        public ActionResult AdminSayfaEkle(int id, int[] selectedSayfalar)
+        {
+
+            var sayfaList = _sayfalarRepo.SayfaListesi();
+            var yetkiList = _yetkiRepo.YetkiListesi();
+            var erisimList = _yetkiErisimRepo.YetkiErisimListesi();
+            var erisimID = _yetkiErisimRepo.Get(id);
+
+            var viewModel = new AnasayfaViewToplu
+            {
+                YetkiList = yetkiList.ToList(),
+                SayfaList = sayfaList.ToList(),
+                ErisimList = erisimList.ToList(),
+                erisimIDd = erisimID
+            };
+
+
+            foreach (var item in selectedSayfalar)
+            {
+                var sayfa = _sayfalarRepo.Get(item);
+                var sayfaEkle = _sayfalarRepo.SayfaEkleGuncelle(sayfa.ErisimAlanlariID);
+            }
+            int kaydet = _unitOfWork.SaveChanges();
+            if (kaydet <= (int)DefinationMessages.Basarisiz)
+            {
+                ViewBag.mesaj = uyariMesaj.Hatali(DefinationMessages.Eklenirken_Hata_Olustu.ToString());
+                return View(viewModel);
+            }
+            ViewBag.mesaj = uyariMesaj.Basarili(DefinationMessages.Ekleme_basarili.ToString());
+            return RedirectToAction("AdminYetkiIndex", viewModel);
+        }
+
+
+
+
+
+
+
+
+        public ActionResult AdminYetkiGuncelle(int id=11)
         {
 
             var yetkiBul = _yetkiRepo.Get(id);
@@ -111,7 +170,7 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
             var viewModel = new AnasayfaViewToplu
             {
                 YetkiID = yetkiBul,
-                ErisimList2 = erisimList
+                ErisimList2 = erisimList,
             };
             return View(viewModel);
         }
@@ -130,6 +189,7 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
     public class AnasayfaViewToplu
     {
         public Yetkiler YetkiID { get; set; }
+        public YetkiErisimleri erisimIDd { get; set; }
         public List<Yetkiler> YetkiList { get; set; }
         public List<ErisimAlanlari> SayfaList { get; set; }
         public List<YetkiErisimleri> ErisimList { get; set; }

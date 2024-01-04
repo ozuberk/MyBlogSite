@@ -2630,7 +2630,6 @@
     <Content Include="Areas\AdminPanel\Views\AdminKullanici\AdminKullaniciIndex.cshtml" />
     <Content Include="Areas\AdminPanel\Views\AdminYorum\AdminYorumIndex.cshtml" />
     <Content Include="Areas\AdminPanel\Views\AdminKategori\AdminKategoriIndex.cshtml" />
-    <Content Include="Areas\AdminPanel\Views\AdminMenu\AdminMenuIndex.cshtml" />
     <Content Include="Areas\AdminPanel\Views\AdminYetki\AdminYetkiIndex.cshtml" />
     <Content Include="Areas\AdminPanel\Views\AdminYetki\AdminYetkiEkle.cshtml" />
     <Content Include="Areas\AdminPanel\Views\AdminMakaleler\AdminMakaleGuncelle.cshtml" />
@@ -2644,6 +2643,8 @@
     <Content Include="Areas\AdminPanel\Views\AdminKullanici\AdminKullaniciSil.cshtml" />
     <Content Include="Areas\AdminPanel\Views\AdminYorum\AdminYorumGuncelle.cshtml" />
     <Content Include="Areas\AdminPanel\Views\AdminYorum\AdminYorumSil.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\AdminYetki\AdminSayfaEkle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\AdminYetki\AdminYetkiGuncelle.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />

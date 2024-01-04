@@ -17,7 +17,7 @@ namespace MyBlogSite.BLL.Repositories
         MyBlogSiteDB _db;
         public ErisimAlanlariRepository(MyBlogSiteDB context) : base(context)
         {
-            _db= context;   
+            _db = context;
         }
 
         public string SayfaEkle(string controllerAdi, string viewAdi, string aciklama)
@@ -43,13 +43,13 @@ namespace MyBlogSite.BLL.Repositories
             try
             {
                 ErisimAlanlari sayfaEkle = new ErisimAlanlari();
-                YetkiErisimleri yetkiErisimSayfalari = new YetkiErisimleri { YetkiErisimleriID = yetkiErisimID };
-
+                YetkiErisimRepository bul = new YetkiErisimRepository(_db);
+                var erisimId = bul.Get(yetkiErisimID);
                 sayfaEkle.ControllerAdi = controllerAdi;
 
                 sayfaEkle.ViewAdi = viewAdi;
-                sayfaEkle.AktifMi = true;
-                sayfaEkle.YetkiErisimleri = yetkiErisimSayfalari;
+                sayfaEkle.AktifMi = false;
+                sayfaEkle.YetkiErisimleri = erisimId;
 
                 Add(sayfaEkle);
                 return DefinationMessages.Ekleme_basarili.ToString();
@@ -63,14 +63,13 @@ namespace MyBlogSite.BLL.Repositories
         public string SayfaGuncelle(int sayfalarId, string controllerAdi, string viewAdi, string aciklama, int yetkiErisimID, bool aktifMi)
         {
             var sayfaGuncelle = Find(k => k.ErisimAlanlariID == sayfalarId).FirstOrDefault();
-            YetkiErisimleri yetkiErisimSayfalari = new YetkiErisimleri { YetkiErisimleriID = yetkiErisimID };
 
             try
             {
                 sayfaGuncelle.ControllerAdi = controllerAdi;
                 sayfaGuncelle.ViewAdi = viewAdi;
                 sayfaGuncelle.Aciklama = aciklama;
-                sayfaGuncelle.YetkiErisimleri= yetkiErisimSayfalari;
+                sayfaGuncelle.YetkiErisimleri.YetkiErisimleriID = yetkiErisimID;
                 sayfaGuncelle.AktifMi = aktifMi;
 
                 return DefinationMessages.Ekleme_basarili.ToString();
@@ -82,6 +81,21 @@ namespace MyBlogSite.BLL.Repositories
             }
         }
 
+        public string SayfaEkleGuncelle(int sayfalarID)
+        {
+            var sayfaGuncelle = Find(k => k.ErisimAlanlariID == sayfalarID).FirstOrDefault();
+
+            try
+            {
+                sayfaGuncelle.AktifMi = true;
+                return DefinationMessages.Ekleme_basarili.ToString();
+
+            }
+            catch (Exception)
+            {
+                return DefinationMessages.Ekleme_islemi_esnasında_hata_olustu.ToString();
+            }
+        }
         public IEnumerable<ErisimAlanlari> SayfaListesi()
         {
             //return GetAll2();
