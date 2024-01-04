@@ -31,7 +31,7 @@ namespace MyBlogSite.UI.Controllers
         {
             TempData["makaleList"] = makaleRepo.MakaleListesi(true);
             TempData["kategoriList"] = kategoriRepo.GetAll();
-            TempData["_YazarList"] = kullaniciRepo.GetAll();
+            TempData["_YazarList"] = kullaniciRepo.GetAll().Where(k=>k.Yetkiler.YetkilerID==1||k.Yetkiler.YetkilerID==2).ToList();
             return View();
         }
         public ActionResult MakaleDetay(int id)

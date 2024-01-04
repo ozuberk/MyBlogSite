@@ -10,11 +10,16 @@ namespace MyBlogSite.UI.Controllers
 {
     public class ProjeController : Controller
     {
-        MyBlogSiteDB _db=new MyBlogSiteDB();
+        MyBlogSiteDB _db;
         ProjeRepository _projeRepo;
+        KullaniciRepository kullaniciRepository;
+
         public ProjeController()
         {
-          _projeRepo=new ProjeRepository(_db);
+            _db = new MyBlogSiteDB();
+            _projeRepo = new ProjeRepository(_db);
+            kullaniciRepository = new KullaniciRepository(_db);
+
         }
         // GET: Proje
         public ActionResult ProjeIndex()
