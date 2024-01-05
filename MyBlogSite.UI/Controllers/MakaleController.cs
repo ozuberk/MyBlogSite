@@ -36,6 +36,9 @@ namespace MyBlogSite.UI.Controllers
         }
         public ActionResult MakaleDetay(int id)
         {
+            TempData["makaleID"] = id;
+            TempData["yorumlar"]=yorumRepo.MakaleYorumlari(id);
+            TempData["altYorumlar"] = yorumRepo.MakaleAltYorumlari(id);
             var makaleGetir = makaleRepo.MakaleListesi(true).Where(m => m.MakalelerID == id).FirstOrDefault();
             var yazarGetir = kullaniciRepo.Find(k => k.KullanicilarID == makaleGetir.Kullanicilar.KullanicilarID).FirstOrDefault();
             var yorumGetir = yorumRepo.Find(y => y.Makaleler.MakalelerID == id);

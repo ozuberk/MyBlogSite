@@ -18,11 +18,11 @@ namespace MyBlogSite.UI.Controllers
             _kullaniciRepo = new KullaniciRepository(_db);
         }
         // GET: Kullanici
-        public ActionResult GirisIndex(int makaleId=0)
+        public ActionResult GirisIndex(int? id = null)
         {
-            if (makaleId>0)
+            if (id != null)
             {
-                TempData["makaleID"] = makaleId;
+                TempData["makaleID"] = id;
             }
             return View();
         }
@@ -37,9 +37,12 @@ namespace MyBlogSite.UI.Controllers
                 Session.Add("userName", kullaniciAdi); //Session oluşturma
                 Session.Add("userID", kullaniciGiris.KullanicilarID);
                 //var login = Session["userName"]; //oluşturulan Session'u kullanma
-                if ((int)TempData["makaleID"]!=0)
+                string kullaniciAdiSoyadi = kullaniciGiris.Adi + " " + kullaniciGiris.Soyadi;
+                TempData["userAdiSoyadi"] = kullaniciAdiSoyadi;
+
+                if ((int)TempData["makaleID"] != 0)
                 {
-                return RedirectToAction("MakaleDetay", "Makaleler",new { id = TempData["makaleID"] });
+                    return RedirectToAction("MakaleDetay", "Makale", new { id = TempData["makaleID"] });
                 }
                 return RedirectToAction("AnasayfaIndex", "Anasayfa");
             }

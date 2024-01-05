@@ -1,24 +1,53 @@
 ﻿@using MyBlogSite.DLL.Tablolar
+@using MyBlogSite.DLL.SiteDatabase.Tablolar
 @model MyBlogSite.UI.Controllers.MakaleController.ViewModeller
 
+@{
+    string makaleId = TempData["makaleID"].ToString();
+}
 <div class="blog-comments">
 
     <h4 class="comments-count">@Model.Makale.Yorumlar.Count Yorum</h4>
 
-    @foreach (var item in (List<Yorumlar>)Model.Yorum)
+    <input type="text" name="name" id="makaleID" value="@makaleId" hidden />
+    @foreach (var item in (List<Sp_YorumListesiDOM>)TempData["yorumlar"])
     {
-        <div id="comment-2" class="comment">
-            <div class="d-flex">
-                <div class="comment-img"><img src="~/Template/assets/img/blog/comments-2.jpg" alt=""></div>
-                <div>
-                    <h5><a href="">@item.Kullanicilar.Adi @item.Kullanicilar.Soyadi</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                    <time datetime="2020-01-01">@item.YorumTarihi</time>
-                    <p>
-                        @item.Yorum
-                    </p>
+        if (item.YorumUstId == 0)
+        {
+            <div id="comment-2" class="comment">
+                <div class="d-flex">
+                    <div class="comment-img"><img src="~/Template/assets/img/blog/comments-2.jpg" alt=""></div>
+                    <div>
+                        <h5><a href="">@item.Adi @item.Soyadi</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                        <time datetime="2020-01-01">@item.YorumTarihi</time>
+                        <p>
+                            @item.Yorum
+                        </p>
+                    </div>
                 </div>
+                <div id="comment-reply-1" class="comment comment-reply">
+                    @foreach (var itemAlt in (List<Sp_YorumListesiDOM>)TempData["altYorumlar"])
+                    {
+                        if (itemAlt.YorumUstId == item.YorumlarID)
+                        {
+                            <div class="d-flex">
+                                <div class="comment-img"><img src="~/Template/assets/img/blog/comments-2.jpg" alt=""></div>
+                                <div>
+                                    <h5><a href="">@itemAlt.Adi @itemAlt.Soyadi</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                                    <time datetime="2020-01-01">@itemAlt.YorumTarihi</time>
+                                    <p>
+                                        @itemAlt.Yorum
+                                    </p>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+
             </div>
-        </div>
+        }
+
 
     }
 
@@ -29,40 +58,41 @@
 
 
 
-    <div class="reply-form">
-        <h4>Leave a Reply</h4>
-        <p>Your email address will not be published. Required fields are marked * </p>
-        <form action="">
-            <div class="row">
-                <div class="col-md-6 form-group">
-                    <input name="name" type="text" class="form-control" placeholder="Your Name*">
+        <div class="reply-form">
+            <h4>Leave a Reply</h4>
+            <p>Your email address will not be published. Required fields are marked * </p>
+            <form action="">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <input name="name" type="text" class="form-control" placeholder="Your Name*">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <input name="email" type="text" class="form-control" placeholder="Your Email*">
+                    </div>
                 </div>
-                <div class="col-md-6 form-group">
-                    <input name="email" type="text" class="form-control" placeholder="Your Email*">
+                <div class="row">
+                    <div class="col form-group">
+                        <input name="website" type="text" class="form-control" placeholder="Your Website">
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col form-group">
-                    <input name="website" type="text" class="form-control" placeholder="Your Website">
+                <div class="row">
+                    <div class="col form-group">
+                        <textarea name="comment" class="form-control" placeholder="Your Comment*"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col form-group">
-                    <textarea name="comment" class="form-control" placeholder="Your Comment*"></textarea>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Post Comment</button>
+                <button type="submit" class="btn btn-primary">Post Comment</button>
 
-        </form>
+            </form>
 
-    </div>
+        </div>
     }
     else
     {
         <div class="col-12">
-            <form action="~/Kullanici/GirisIndex"
-            @*<input type="submit" class="btn btn-primary"value="Yorum Yap">*@
-            @Html.ActionLink("Yorum Yap", "GirisIndex", "Kullanici", new {@class="btn btn-danger"})
+            <form action="~/Kullanici/GirisIndex" method="post">
+                @*<input type="submit" class="btn btn-primary"value="Yorum Yap">*@
+                @Html.ActionLink("Yorum Yap", "GirisIndex", "Kullanici", new { id = makaleId }, new { @class = "btn btn-danger" })
+            </form>
 
         </div>
     }
