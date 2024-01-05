@@ -122,6 +122,7 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
             var sayfaBul = _sayfalarRepo.Find(k => k.YetkiErisimleri.YetkiErisimleriID == id);
             return View(viewModel);
         }
+        [HttpPost]
         public ActionResult AdminSayfaEkle(int id, int[] selectedSayfalar)
         {
 
