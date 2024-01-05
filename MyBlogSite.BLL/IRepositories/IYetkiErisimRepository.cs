@@ -17,7 +17,7 @@ namespace MyBlogSite.BLL.IRepositories
         IEnumerable<YetkiErisimleri> YetkiErisimListesi(bool aktifMi);
         IEnumerable<Sp_YetkiErisimListesiDOM> Sp_YetkiErisimListesi();
         IEnumerable<Sp_YetkiErisimListesiDOM> Sp_YetkiErisimListesi(bool aktifMi);
-        IEnumerable<Sp_YetkiErisimListesiDOM> Sp_YetkiErisimListesi(int yetkiID);
-        IEnumerable<Sp_YetkiErisimListesiDOM> Sp_YetkiErisimListesi(int yetkiID, bool aktifMi);
+        IEnumerable<Sp_YetkiErisimListesiDOM> Sp_YetkiErisimListesi(int yetkiErisimId);
+        IEnumerable<Sp_YetkiErisimListesiDOM> Sp_YetkiErisimListesi(int yetkiErisimId, bool aktifMi);
     }
 }

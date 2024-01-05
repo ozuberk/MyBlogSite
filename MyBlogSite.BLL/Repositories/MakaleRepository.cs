@@ -54,11 +54,11 @@ namespace MyBlogSite.BLL.Repositories
                 makaleGuncelle.MakaleBaslik = makaleBaslik;
                 makaleGuncelle.AktifMi = aktifMi;
 
-                return DefinationMessages.Ekleme_basarili.ToString();
+                return DefinationMessages.Guncelleme_basarili.ToString();
             }
             catch (Exception)
             {
-                return DefinationMessages.Ekleme_islemi_esnasında_hata_olustu.ToString();
+                return DefinationMessages.Guncelleme_islemi_esnasında_hata_olustu.ToString();
 
             }
         }
@@ -84,11 +84,11 @@ namespace MyBlogSite.BLL.Repositories
             {
                 var pasifEt = Get(makaleId);
                 pasifEt.AktifMi = false;
-                return DefinationMessages.Basarili.ToString();
+                return DefinationMessages.Pasif_Basarili.ToString();
             }
             catch (Exception)
             {
-                return DefinationMessages.Basarisiz.ToString();
+                return DefinationMessages.Pasif_Edilirken_Hata_Olustu.ToString();
             }
 
         }

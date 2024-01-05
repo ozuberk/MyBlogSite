@@ -46,7 +46,6 @@ namespace MyBlogSite.BLL.Repositories
                 kategoriGuncelle.KategoriAdi = kategoriAdi;
                 kategoriGuncelle.Aciklama = aciklama != null ? aciklama : " ";
                 kategoriGuncelle.AktifMi = aktifMi;
-                //Update(kategoriGuncelle)s;
                 return DefinationMessages.Guncelleme_basarili.ToString();
 
 
@@ -79,11 +78,11 @@ namespace MyBlogSite.BLL.Repositories
             {
                 var pasifEt = Get(kategoriID);
                 pasifEt.AktifMi = false;
-                return DefinationMessages.Basarili.ToString();
+                return DefinationMessages.Pasif_Basarili.ToString();
             }
             catch (Exception)
             {
-                return DefinationMessages.Basarisiz.ToString();
+                return DefinationMessages.Pasif_Edilirken_Hata_Olustu.ToString();
             }
         }
     }

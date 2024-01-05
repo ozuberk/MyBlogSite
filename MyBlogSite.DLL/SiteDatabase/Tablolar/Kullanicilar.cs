@@ -45,7 +45,6 @@ namespace MyBlogSite.DLL.Tablolar
         public virtual List<Makaleler> Makeleler { get; set; }
         public virtual List<Projeler> Projeler { get; set; }
 
-        public virtual List<Resimler> Resimler { get; set; }
         public virtual Yetkiler Yetkiler { get; set; }
 
         public virtual List<Yorumlar> Yorumlar { get; set; }

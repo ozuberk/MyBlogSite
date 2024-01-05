@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MyBlogSite.BLL.Repositories
 {
-    public class KullaniciRepository:Repository<Kullanicilar>,IKullaniciRepository
+    public class KullaniciRepository : Repository<Kullanicilar>, IKullaniciRepository
     {
         MyBlogSiteDB _db;
 
@@ -27,20 +27,20 @@ namespace MyBlogSite.BLL.Repositories
             {
                 Kullanicilar kullaniciEkle = new Kullanicilar();
                 kullaniciEkle.Adi = adi;
-                kullaniciEkle.Soyadi= soyadi;
+                kullaniciEkle.Soyadi = soyadi;
                 kullaniciEkle.KullaniciAdi = kullaniciAdi;
                 kullaniciEkle.KullaniciSifresi = kullaniciSifresi;
-                kullaniciEkle.email=email;
-                kullaniciEkle.twitter=twitter;
-                kullaniciEkle.github=github;
-                kullaniciEkle.linkedln=linkedln;
-                kullaniciEkle.meslek=meslek;
+                kullaniciEkle.email = email;
+                kullaniciEkle.twitter = twitter;
+                kullaniciEkle.github = github;
+                kullaniciEkle.linkedln = linkedln;
+                kullaniciEkle.meslek = meslek;
                 kullaniciEkle.YasadigiUlke = ulke;
                 kullaniciEkle.YasadigiSehir = sehir;
                 kullaniciEkle.KisacaHakkinda = hakkinda;
                 kullaniciEkle.AktifMi = true;
-                kullaniciEkle.EklenmeTarihi=DateTime.Now;
-                kullaniciEkle.PasiflikTarihi=DateTime.Now;
+                kullaniciEkle.EklenmeTarihi = DateTime.Now;
+                kullaniciEkle.PasiflikTarihi = DateTime.Now;
                 kullaniciEkle.Yetkiler = _db.Yetkiler.Where(y => y.YetkilerID == 3).FirstOrDefault();
                 Add(kullaniciEkle);
                 return DefinationMessages.Ekleme_basarili.ToString();
@@ -71,13 +71,13 @@ namespace MyBlogSite.BLL.Repositories
                 kullaniciEkle.YasadigiSehir = sehir;
                 kullaniciEkle.KisacaHakkinda = hakkinda;
                 kullaniciEkle.AktifMi = aktifMi;
-                kullaniciEkle.EklenmeTarihi = eklenmeTarihi!=null?eklenmeTarihi:DateTime.Now;
+                kullaniciEkle.EklenmeTarihi = eklenmeTarihi != null ? eklenmeTarihi : DateTime.Now;
                 kullaniciEkle.Yetkiler = _db.Yetkiler.Where(y => y.YetkilerID == 3).FirstOrDefault();
-                return DefinationMessages.Ekleme_basarili.ToString();
+                return DefinationMessages.Guncelleme_basarili.ToString();
             }
             catch (Exception)
             {
-                return DefinationMessages.Ekleme_islemi_esnasında_hata_olustu.ToString();
+                return DefinationMessages.Guncelleme_islemi_esnasında_hata_olustu.ToString();
 
             }
         }
@@ -97,19 +97,19 @@ namespace MyBlogSite.BLL.Repositories
         {
             return Find(k => k.KullanicilarID == kullanicilarId).Count();
         }
-       
+
         public string KullaniciSil(int kullaniciId)
         {
             try
             {
                 var pasifEt = Get(kullaniciId);
                 pasifEt.AktifMi = false;
-                pasifEt.PasiflikTarihi=DateTime.Now;
-                return DefinationMessages.Basarili.ToString();
+                pasifEt.PasiflikTarihi = DateTime.Now;
+                return DefinationMessages.Pasif_Basarili.ToString();
             }
             catch (Exception)
             {
-                return DefinationMessages.Basarisiz.ToString();
+                return DefinationMessages.Pasif_Edilirken_Hata_Olustu.ToString();
             }
         }
         public Kullanicilar Giris(string kullaniciAdi, string sifre)

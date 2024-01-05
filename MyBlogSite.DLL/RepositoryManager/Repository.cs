@@ -50,7 +50,6 @@ namespace MyBlogSite.DLL.RepositoryManager
         }
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
-#warning    UnitOfWork için işlem gerekli
             Context.Set<TEntity>().RemoveRange(entities);
         }        
 

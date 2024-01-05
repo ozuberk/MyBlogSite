@@ -98,7 +98,6 @@ namespace MyBlogSite.BLL.Repositories
         }
         public IEnumerable<ErisimAlanlari> SayfaListesi()
         {
-            //return GetAll2();
             return GetAll(k => k.YetkiErisimleri.YetkiErisimleriID == null);
         }
 

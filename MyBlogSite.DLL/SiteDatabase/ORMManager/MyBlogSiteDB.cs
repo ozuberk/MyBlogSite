@@ -17,14 +17,12 @@ namespace MyBlogSite.DLL.ORMManager
         public DbSet<Kategoriler> MakaleKategorileri { get; set; }
         public DbSet<Kullanicilar> Kullanicilar { get; set; }
         public DbSet<Makaleler> Makaleler { get; set; }
-        public DbSet<Menu> Menu { get; set; }
         public DbSet<Projeler> Projeler { get; set; }
-        public DbSet<Resimler> Resimler { get; set; }
         public DbSet<YetkiErisimleri> YetkiErisimleri { get; set; }
         public DbSet<Yetkiler> Yetkiler { get; set; }
         public DbSet<Yorumlar> Yorumlar { get; set; }
 
-        
+
         public IEnumerable<Sp_MakaleListesiDOM> Sp_MakaleListesi()
         {
             var getSp = Database.SqlQuery<Sp_MakaleListesiDOM>("EXEC Sp_MakaleListesi");
@@ -50,14 +48,13 @@ namespace MyBlogSite.DLL.ORMManager
     public class CreateDB : CreateDatabaseIfNotExists<MyBlogSiteDB>
     {
 
-        public override void InitializeDatabase(MyBlogSiteDB context)//DB oluşurken çalışacak method
+        public override void InitializeDatabase(MyBlogSiteDB context)
         {
-            //Makaleler tablosunun herhangi bir kolonu için işlem gerekirse bu ksımdan ayar yapılır
             base.InitializeDatabase(context);
         }
 
 
-        protected override void Seed(MyBlogSiteDB context)//DB oluştuktan sonra çalışan method
+        protected override void Seed(MyBlogSiteDB context)
         {
             base.Seed(context);
         }

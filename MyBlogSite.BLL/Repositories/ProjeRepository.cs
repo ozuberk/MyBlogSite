@@ -54,7 +54,6 @@ namespace MyBlogSite.BLL.Repositories
                 projeGuncelle.ProjeAdi = projeAdi;
                 projeGuncelle.ProjeLinki = projeLinki;
                 projeGuncelle.AktifMi = aktifMi;
-                //Update(projeGuncelle);//????
 
                 return DefinationMessages.Guncelleme_basarili.ToString();
             }
@@ -74,17 +73,23 @@ namespace MyBlogSite.BLL.Repositories
             return Find(k => k.AktifMi == aktifMi);
         }
 
+        public int ProjeSayisi(int projeId)
+        {
+            return Find(k => k.ProjelerID == projeId).Count();
+
+        }
+
         public string ProjeSil(int projeId)
         {
             try
             {
                 var pasifEt = Get(projeId);
                 pasifEt.AktifMi = false;
-                return DefinationMessages.Basarili.ToString();
+                return DefinationMessages.Pasif_Basarili.ToString();
             }
             catch (Exception)
             {
-                return DefinationMessages.Basarisiz.ToString();
+                return DefinationMessages.Pasif_Edilirken_Hata_Olustu.ToString();
             }
         }
 

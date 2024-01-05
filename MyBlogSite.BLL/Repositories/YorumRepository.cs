@@ -79,11 +79,11 @@ namespace MyBlogSite.BLL.Repositories
                 yorumEkle.Kullanicilar = _db.Kullanicilar.Where(k => k.KullanicilarID == kullaniciID).FirstOrDefault();
                 yorumEkle.Makaleler = _db.Makaleler.Where(k => k.MakalelerID == makalelerID).FirstOrDefault();
                 Add(yorumEkle);
-                return "Ekleme Başarılı";
+                return DefinationMessages.Ekleme_basarili.ToString();
             }
             catch (Exception)
             {
-                return "Ekleme İşlemi Esnasında Hata Oluştu";
+                return DefinationMessages.Ekleme_islemi_esnasında_hata_olustu.ToString();
             }
         }
 
@@ -95,12 +95,11 @@ namespace MyBlogSite.BLL.Repositories
                 yorumGuncelle.Yorum = yorum;
                 yorumGuncelle.YorumTarihi = DateTime.Now;
                 yorumGuncelle.AktifMi = aktifMi;
-                //Update(yorumGuncelle);
-                return "Güncelleme Başarılı";
+                return DefinationMessages.Guncelleme_basarili.ToString();
             }
             catch (Exception)
             {
-                return "Güncelleme İşlemi Esnasında Hata Oluştu";
+                return DefinationMessages.Guncelleme_islemi_esnasında_hata_olustu.ToString();
             }
         }
 
@@ -120,11 +119,11 @@ namespace MyBlogSite.BLL.Repositories
             {
                 var pasifEt = Get(yorumlarID);
                 pasifEt.AktifMi = false;
-                return DefinationMessages.Basarili.ToString();
+                return DefinationMessages.Pasif_Basarili.ToString();
             }
             catch (Exception)
             {
-                return DefinationMessages.Basarisiz.ToString();
+                return DefinationMessages.Pasif_Edilirken_Hata_Olustu.ToString();
             }
         }
     }

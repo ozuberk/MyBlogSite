@@ -49,7 +49,6 @@ namespace MyBlogSite.BLL.Repositories
             {
                 yetkiGuncelle.YetkiAdi = yetkiAdi;
                 yetkiGuncelle.AktifMi= aktifMi;
-                //Update(yetkiGuncelle);
                 return DefinationMessages.Guncelleme_basarili.ToString();
 
             }

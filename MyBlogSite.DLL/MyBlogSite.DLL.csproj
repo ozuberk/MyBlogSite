@@ -61,9 +61,7 @@
     <Compile Include="SiteDatabase\Tablolar\Kullanicilar.cs" />
     <Compile Include="SiteDatabase\Tablolar\Kategoriler.cs" />
     <Compile Include="SiteDatabase\Tablolar\Makaleler.cs" />
-    <Compile Include="SiteDatabase\Tablolar\Menu.cs" />
     <Compile Include="SiteDatabase\Tablolar\Projeler.cs" />
-    <Compile Include="SiteDatabase\Tablolar\Resimler.cs" />
     <Compile Include="SiteDatabase\Tablolar\Sp_MakaleListesiDOM.cs" />
     <Compile Include="SiteDatabase\Tablolar\Sp_ProjeListesiDOM.cs" />
     <Compile Include="SiteDatabase\Tablolar\Sp_YetkiErisimListesiDOM.cs" />

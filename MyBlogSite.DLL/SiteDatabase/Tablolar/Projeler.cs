@@ -26,11 +26,10 @@ namespace MyBlogSite.DLL.Tablolar
         public bool AktifMi { get; set; }
 
         [Required]
-        public virtual Kullanicilar Kullanicilar { get; set; }//diagram 1 lik
+        public virtual Kullanicilar Kullanicilar { get; set; }
 
-        public virtual Kategoriler ProjeKategorileri { get; set; }//diagram 1 lik
+        public virtual Kategoriler ProjeKategorileri { get; set; }
 
-        public virtual List<Resimler> Resimler { get; set; }//diagram için sonsuz tarafı işaret eder
         public virtual List<Yorumlar> Yorumlar { get; set; }
     }
 }

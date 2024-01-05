@@ -10,9 +10,7 @@ namespace MyBlogSite.DLL.SiteDatabase
     public class ExistsStoredProcedure
     {
         MyBlogSiteDB db = new MyBlogSiteDB();
-        /// <summary>
-        /// SqlDe yazdığımız spnin aynısını yapacağız
-        /// </summary>
+
         public string Sp_MakaleListesi()
         {
             try
@@ -89,7 +87,7 @@ namespace MyBlogSite.DLL.SiteDatabase
                         y.Makaleler_MakalelerID,
                         k.Adi,
                         k.Soyadi,                        
-                        k.AktifMi,
+                        y.AktifMi,
                         y.Yorum,
                         y.YorumUstId,
                         y.YorumTarihi

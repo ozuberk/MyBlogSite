@@ -19,7 +19,5 @@ namespace MyBlogSite.BLL.IRepositories
         IEnumerable<Makaleler> MakaleListesi(bool aktifMi);
         IEnumerable<Sp_MakaleListesiDOM> Sp_MakaleListesi();
         IEnumerable<Sp_MakaleListesiDOM> Sp_MakaleListesi(bool aktifMi);
-        //
-
     }
 }

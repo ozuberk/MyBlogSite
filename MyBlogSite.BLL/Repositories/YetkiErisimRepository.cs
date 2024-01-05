@@ -68,12 +68,12 @@ namespace MyBlogSite.BLL.Repositories
                 yetkiErisimGuncelle.Aciklama = aciklama;
                 yetkiErisimGuncelle.AktifMi = aktifMi;
 
-                return DefinationMessages.Ekleme_basarili.ToString();
+                return DefinationMessages.Guncelleme_basarili.ToString();
 
             }
             catch (Exception)
             {
-                return DefinationMessages.Ekleme_islemi_esnasında_hata_olustu.ToString();
+                return DefinationMessages.Guncelleme_islemi_esnasında_hata_olustu.ToString();
             }
         }
 
