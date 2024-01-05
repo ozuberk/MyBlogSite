@@ -40,7 +40,8 @@ namespace MyBlogSite.UI.Controllers
                 Session.Add("userID", kullaniciGiris.KullanicilarID);
                 //var login = Session["userName"]; //oluşturulan Session'u kullanma
                 string kullaniciAdiSoyadi = kullaniciGiris.Adi + " " + kullaniciGiris.Soyadi;
-                TempData["userAdiSoyadi"] = kullaniciAdiSoyadi;
+                Session["userAdiSoyadi"] = kullaniciAdiSoyadi;
+                //Session.Add("userAdiSoyadi", kullaniciAdiSoyadi);
 
                 if ((int)TempData["makaleID"] > 0)
                 {

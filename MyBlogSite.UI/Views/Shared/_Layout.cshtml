@@ -65,9 +65,9 @@
 
         </div>
         <div class="navbar">
-            @if (TempData["userAdiSoyadi"] != null)
+            @if (Session["userAdiSoyadi"] != null)
             {
-                <a href="#" class="mx-2"><span class="getstarted bi-person">@TempData["userAdiSoyadi"]</span></a>
+                <a href="#" class="mx-2"><span class="getstarted bi-person">@Session["userAdiSoyadi"]</span></a>
             }
             else
             {
