@@ -18,12 +18,14 @@ namespace MyBlogSite.UI.Controllers
             _kullaniciRepo = new KullaniciRepository(_db);
         }
         // GET: Kullanici
-        public ActionResult GirisIndex(int? id = null)
+        public ActionResult GirisIndex(int? id)
         {
-            if (id != null)
+            if (id.ToString() != null)
             {
                 TempData["makaleID"] = id;
             }
+            int makaleIdyeni = id ?? -1;
+            TempData["makaleID"] = makaleIdyeni;
             return View();
         }
 
@@ -40,9 +42,13 @@ namespace MyBlogSite.UI.Controllers
                 string kullaniciAdiSoyadi = kullaniciGiris.Adi + " " + kullaniciGiris.Soyadi;
                 TempData["userAdiSoyadi"] = kullaniciAdiSoyadi;
 
-                if ((int)TempData["makaleID"] != 0)
+                if ((int)TempData["makaleID"] > 0)
                 {
                     return RedirectToAction("MakaleDetay", "Makale", new { id = TempData["makaleID"] });
+                }
+                else if ((int)TempData["makaleID"] == -1)
+                {
+                    return RedirectToAction("AnasayfaIndex", "Anasayfa");
                 }
                 return RedirectToAction("AnasayfaIndex", "Anasayfa");
             }
