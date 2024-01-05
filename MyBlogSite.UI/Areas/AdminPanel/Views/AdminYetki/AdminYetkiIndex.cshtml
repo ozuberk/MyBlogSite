@@ -23,11 +23,12 @@
 
                                 @foreach (var item in Model.YetkiList)
                                 {
-                                    <a href="#" class="nav-link">
+                                    <div href="#" class="nav-link">
                                         <i class=""></i> @item.YetkiAdi
-                                        <span href='~/AdminPanel/AdminYetki/AdminYetkiSil/@item.YetkilerID' class='btn btn-sm btn-danger float-right'><i class='fas fa-trash'></i></span>
-                                        <span href='~/AdminPanel/AdminYetki/AdminYetkiGuncelle/@item.YetkilerID' class='btn btn-sm btn-warning float-right'><i class='fas fa-pencil-alt'></i></span>
-                                    </a>
+                                        <a href='/AdminPanel/AdminYetki/AdminYetkiSil/@item.YetkiErisimleri.YetkiErisimleriID' class='btn btn-sm btn-danger float-right'><i class='fas fa-trash'></i></a>
+                                        <a href='/AdminPanel/AdminYetki/AdminYetkiGuncelle/@item.YetkiErisimleri.YetkiErisimleriID' class='btn btn-sm btn-warning float-right'><i class='fas fa-pencil-alt'></i></a>
+                                        @*@Html.ActionLink("Gnc", "AdminYetkiGuncelle", "AdminYetki", new { id = item.YetkilerID }, new { @class = "btn btn-sm fas fas fa-trash" })*@
+                                    </div>
                                 }
 
                             </li>

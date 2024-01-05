@@ -104,7 +104,7 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
         }
 
         [HttpGet]
-        public ActionResult AdminSayfaEkle(int id = 44)
+        public ActionResult AdminSayfaEkle(int id)
         {
             var sayfaList = _sayfalarRepo.SayfaListesi();
             var yetkiList = _yetkiRepo.YetkiListesi();
@@ -161,24 +161,40 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
 
 
 
-        public ActionResult AdminYetkiGuncelle(int id=11)
+        public ActionResult AdminYetkiGuncelle(int id)
         {
 
             var yetkiBul = _yetkiRepo.Get(id);
             var erisimList = _yetkiErisimRepo.Sp_YetkiErisimListesi(id).ToList();
+            var yetkiList = _yetkiRepo.GetAll();
 
             var viewModel = new AnasayfaViewToplu
             {
                 YetkiID = yetkiBul,
                 ErisimList2 = erisimList,
+                YetkiList = yetkiList.ToList()
+
             };
             return View(viewModel);
         }
-        [HttpPost, ValidateInput(false)]
-        public ActionResult AdminYetkiGuncelle(int id, string yetkiAdi, bool aktifMi)
+        [HttpPost, ActionName("AdminYetkiGuncelle")]
+        public ActionResult AdminYetkiGuncelle_(int id)
         {
             var yetkiBul = _yetkiRepo.Get(id);
-            return View(yetkiBul);
+            var erisimList = _yetkiErisimRepo.Sp_YetkiErisimListesi(id).ToList();
+            var yetkiList = _yetkiRepo.GetAll();
+            var erisimBul = _yetkiErisimRepo.Get2(y => y.Yetkiler.FirstOrDefault().YetkilerID == id);
+            TempData["erisimAlanBul"] = erisimList;
+
+            var viewModel = new AnasayfaViewToplu
+            {
+                YetkiID = yetkiBul,
+                ErisimList2 = erisimList,
+                YetkiList = yetkiList.ToList(),
+                erisimIDd = erisimBul
+            };
+            //var yetkiBul = _yetkiRepo.Get(id);
+            return View(viewModel);
 
         }
 
