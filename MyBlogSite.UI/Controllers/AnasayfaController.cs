@@ -25,8 +25,8 @@ namespace MyBlogSite.UI.Controllers
 
             MakaleManager makaleManager = new MakaleManager();
             makaleManager.MakaleListesi();
-
-            return View(kullaniciRepository.Get(2));
+            //kullaniciRepository.Get(1)
+            return View();
         }
     }
 }

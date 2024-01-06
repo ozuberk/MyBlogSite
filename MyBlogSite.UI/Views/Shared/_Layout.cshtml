@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using MyBlogSite.UI.Models
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -64,10 +65,21 @@
             </nav><!-- .navbar -->
 
         </div>
-        <div class="navbar">
+        <div class="position-relative">
             @if (Session["userAdiSoyadi"] != null)
             {
-                <a href="#" class="mx-2"><span class="getstarted bi-person">@Session["userAdiSoyadi"]</span></a>
+                <a href="#" class="mx-2 dropdown-toggle"><span class="getstarted bi-person">@Session["userAdiSoyadi"]</span></a>
+                <div class="dropdown-menu">
+                    @if (Session["userID"].ToString() == YetkilerEnums.Admin.GetHashCode().ToString() || Session["userID"].ToString() == YetkilerEnums.Yazar.GetHashCode().ToString())
+                    {
+
+                        <a class="dropdown-item" href="~/AdminPanel/AdminAnasayfa/AdminAnasayfaIndex/@TempData["kullaniciID"] ">Admin Paneli</a>
+                    }
+                    <a class="dropdown-item" href="~/Kullanici/KullaniciCikis">Çıkış</a>
+                    @*<a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>*@
+                </div>
             }
             else
             {

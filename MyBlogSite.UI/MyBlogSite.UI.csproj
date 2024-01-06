@@ -148,6 +148,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\UyariMesajlari.cs" />
+    <Compile Include="Models\YetkilerEnums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2839,6 +2840,7 @@
     <Content Include="Views\Shared\_Kategoriler.cshtml" />
     <Content Include="Views\Shared\_Yorumlar.cshtml" />
     <Content Include="Views\Kullanici\GirisIndex.cshtml" />
+    <Content Include="Views\Shared\_LoginDropDown.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
