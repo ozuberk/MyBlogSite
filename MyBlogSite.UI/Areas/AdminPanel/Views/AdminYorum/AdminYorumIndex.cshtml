@@ -1,29 +1,24 @@
 ﻿@using MyBlogSite.DLL.SiteDatabase.Tablolar
 @model List<Sp_YorumListesiDOM>
-@{
-    ViewBag.Title = "AdminYorumIndex";
-    Layout = "~/Areas/AdminPanel/Views/Shared/_AdminLayoutDefault.cshtml";
-}
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0">
-                    <a href="#" class="btn btn-success">Yeni Yorum Ekle</a>
+                    @*<a href="#" class="btn btn-success">Yeni Yorum Ekle</a>*@
                 </h1>
-            </div><!-- /.col -->
+            </div>
             <div class="col-sm-6">
 
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Yorumlar</a></li>
                     <li class="breadcrumb-item active">Yorumlar Listesi</li>
                 </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.content-header -->
-<!-- Main content -->
 
 <section class="content">
     <div class="container-fluid">
@@ -54,11 +49,9 @@
                                     <td>@item.KullanicilarID</td>
                                     <td>@item.Makaleler_MakalelerID</td>
                                     <td>
-                                        @*@Html.ActionLink("Güncelle", "#", "", new { @class = "btn btn-block btn-warning btn-sm" })*@
                                         <a href='~/AdminPanel/AdminYorum/AdminYorumGuncelle/@item.YorumlarID' class='btn btn-sm btn-warning'><i class='fas fa-pencil-alt'></i></a>
                                     </td>
                                     <td>
-                                        @*@Html.ActionLink("Sil", "#", "", new { @class = "btn btn-block btn-danger btn-sm" })*@
                                         <a href='~/AdminPanel/AdminYorum/AdminYorumSil/@item.YorumlarID' class='btn btn-sm btn-danger'><i class='fas fa-pencil-alt'></i></a>
                                     </td>
                                 </tr>
