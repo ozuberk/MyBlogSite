@@ -110,10 +110,11 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
         [HttpGet]
         public ActionResult AdminSayfaEkle(int id)
         {
-            var sayfaList = _sayfalarRepo.SayfaListesi();
+            var erisimID = _yetkiErisimRepo.Get(id);
+
+            var sayfaList = _sayfalarRepo.GetAll().Where(k => k.YetkiErisimleri == erisimID);
             var yetkiList = _yetkiRepo.YetkiListesi();
             var erisimList = _yetkiErisimRepo.YetkiErisimListesi();
-            var erisimID = _yetkiErisimRepo.Get(id);
             ViewBag.ErisimID = id;
             var viewModel = new AnasayfaViewToplu
             {
@@ -129,12 +130,12 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
         [HttpPost]
         public ActionResult AdminSayfaEkle(int id, params int[] selectedSayfalar)
         {
-           
 
-            var sayfaList = _sayfalarRepo.SayfaListesi();
+            var erisimID = _yetkiErisimRepo.Get(id);
+            var sayfaList = _sayfalarRepo.GetAll().Where(k => k.YetkiErisimleri == erisimID);
             var yetkiList = _yetkiRepo.YetkiListesi();
             var erisimList = _yetkiErisimRepo.YetkiErisimListesi();
-            var erisimID = _yetkiErisimRepo.Get(id);
+
 
             var viewModel = new AnasayfaViewToplu
             {
@@ -176,9 +177,9 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
             return View(erisimBul);
         }
         [HttpPost, ActionName("AdminYetkiGuncelle")]
-        public ActionResult AdminYetkiGuncelle_(int id,string yetkiAdi,string erisimAciklama,params int[] selecctedSayfalar)
+        public ActionResult AdminYetkiGuncelle_(int id, string yetkiAdi, string erisimAciklama, params int[] selecctedSayfalar)
         {
-            
+
 
 
 

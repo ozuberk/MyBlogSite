@@ -25,11 +25,11 @@
                                     <h5 class="card-title">Erişim Alanları @Model.erisimIDd.YetkiErisimleriID</h5>
                                 </div>
                                 <div class="card-body">
-                                    @foreach (var item in Model.ErisimList)
+                                    @foreach (var item in Model.SayfaList)
                                     {
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" id="customCheckbox_@item.ErisimAlanlari.FirstOrDefault().ErisimAlanlariID" name="selectedSayfalar" value="@item.ErisimAlanlari.FirstOrDefault().ErisimAlanlariID">
-                                            <label for="customCheckbox_@item.ErisimAlanlari.FirstOrDefault().ErisimAlanlariID" class="custom-control-label">@item.ErisimAlanlari.FirstOrDefault().ControllerAdi</label>
+                                            <input class="custom-control-input" type="checkbox" id="customCheckbox_@item.ErisimAlanlariID" name="selectedSayfalar" value="@item.ErisimAlanlariID">
+                                            <label for="customCheckbox_@item.ErisimAlanlariID" class="custom-control-label">@item.ControllerAdi</label>
                                         </div>
                                     }
                                 </div>
