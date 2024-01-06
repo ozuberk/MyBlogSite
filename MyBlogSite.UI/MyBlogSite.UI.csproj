@@ -2646,6 +2646,9 @@
     <Content Include="Areas\AdminPanel\Views\AdminYorum\AdminYorumSil.cshtml" />
     <Content Include="Areas\AdminPanel\Views\AdminYetki\AdminSayfaEkle.cshtml" />
     <Content Include="Areas\AdminPanel\Views\AdminYetki\AdminYetkiGuncelle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\AdminKategori\AdminKategoriEkle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\AdminKategori\AdminKategoriGuncelle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\AdminKategori\AdminKategoriSil.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
