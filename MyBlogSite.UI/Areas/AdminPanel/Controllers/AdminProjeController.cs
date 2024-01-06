@@ -26,7 +26,6 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
             _kategoriRepo = new KategoriRepository(_db);
             _unitOfWork = new UnitOfWork(_db);
         }
-        // GET: AdminPanel/AdminProje
         public ActionResult AdminProjeIndex()
         {
             return View(_projeRepo.Sp_ProjeListesi());
@@ -56,7 +55,6 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
                 ViewBag.mesaj = uyariMesaj.Hatali(DefinationMessages.Eklenirken_Hata_Olustu.ToString());
                 return View(kategoriList);
             }
-            //ViewBag.mesaj = @"<div class='alert alert-success' role='alert'>  " + DefinationMessages.Ekleme_basarili.ToString()+ "</div>";
             ViewBag.mesaj = uyariMesaj.Basarili(DefinationMessages.Ekleme_basarili.ToString());
 
             return View(kategoriList);

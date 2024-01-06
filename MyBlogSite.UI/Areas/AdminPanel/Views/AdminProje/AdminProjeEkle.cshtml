@@ -18,25 +18,19 @@
                     <li class="breadcrumb-item"><a href="~/AdminPanel/AdminProje/AdminProjeEkle">Proje Listesi</a></li>
                     <li class="breadcrumb-item active">Proje Ekle</li>
                 </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.content-header -->
-<!-- Main content -->
 
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <!-- left column -->
             <div class="col-md-12">
-                <!-- jquery validation -->
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">PROJE EKLE</h3>
                     </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
                     <form id="projeEkleForm" action="~/AdminPanel/AdminProje/AdminProjeEkle" method="post">
                         <div class="card-body">
                             <div class="form-group">
@@ -61,14 +55,14 @@
                                 <input type="text" name="projeLinki" class="form-control" id="" placeholder="Proje Linki">
                             </div>
 
-                            
 
-                        <!-- /.card-body -->
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-success">PROJE EKLE</button>
-                        </div>
-                        <div>
-                            @Html.Raw(ViewBag.mesaj)
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">PROJE EKLE</button>
+                            </div>
+                            <div>
+                                @Html.Raw(ViewBag.mesaj)
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -79,19 +73,20 @@
 
 @section addBottomLibrary{
     <script src="~/Areas/AdminPanel/AdminLTE/plugins/summernote/summernote-bs4.min.js"></script>
-    
-    <script src="~/Areas/AdminPanel/AdminLTE/plugins/jquery-validation/jquery.validate.js"></script>
-    <script>$(function () {
 
-    $('#projeEkleForm').validate({
+    <script src="~/Areas/AdminPanel/AdminLTE/plugins/jquery-validation/jquery.validate.js"></script>
+    <script>
+    $(function () {
+
+            $('#projeEkleForm').validate({
                 rules: {
-            projeKategori: {
+                    projeKategori: {
                         required: true
                     },
-            projeAdi: {
+                    projeAdi: {
                         required: true
                     },
-            projeLinki: {
+                    projeLinki: {
                         required: true
                     }
 
