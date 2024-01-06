@@ -29,7 +29,6 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
             _sayfalarRepo = new ErisimAlanlariRepository(_db);
             _unitOfWork = new UnitOfWork(_db);
         }
-        // GET: AdminPanel/AdminYetki
         public ActionResult AdminYetkiIndex()
         {
             var list = _yetkiRepo.YetkiListesi();
@@ -56,7 +55,7 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
             };
             return View(viewModel);
         }
-        [ValidateInput(false), HttpPost]
+        [HttpPost]
 
         public ActionResult AdminYetkiEkle(string yetkiAdi, string aciklama)
         {
@@ -110,7 +109,7 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
             var yetkiList = _yetkiRepo.YetkiListesi();
             var erisimList = _yetkiErisimRepo.YetkiErisimListesi();
             var erisimID = _yetkiErisimRepo.Get(id);
-
+            ViewBag.ErisimID = id;
             var viewModel = new AnasayfaViewToplu
             {
                 YetkiList = yetkiList.ToList(),

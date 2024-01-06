@@ -1,4 +1,8 @@
 ﻿@model MyBlogSite.UI.Areas.AdminPanel.Controllers.AnasayfaViewToplu
+@using (Html.BeginForm("AdminSayfaEkle", "AdminYetki", FormMethod.Post))
+{
+    @Html.Hidden("id", (int)ViewBag.ErisimID)
+}
 
 <section class="content">
     <div class="container-fluid">

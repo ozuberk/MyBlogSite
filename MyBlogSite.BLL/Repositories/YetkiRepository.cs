@@ -25,13 +25,13 @@ namespace MyBlogSite.BLL.Repositories
         {
             try
             {
-                YetkiErisimleri yetkiErisimSayfalari = new YetkiErisimleri { YetkiErisimleriID = erisimID };
 
                 Yetkiler yetkiEkle = new Yetkiler();
-                yetkiEkle.YetkiAdi= yetkiAdi;
+                YetkiErisimRepository bul = new YetkiErisimRepository(_db);
+                var erisimId = bul.Get(erisimID);
+                yetkiEkle.YetkiAdi = yetkiAdi;
                 yetkiEkle.AktifMi = true;
-                yetkiEkle.YetkiErisimleri = yetkiErisimSayfalari;
-
+                yetkiEkle.YetkiErisimleri = erisimId;
                 Add(yetkiEkle);
                 return DefinationMessages.Ekleme_basarili.ToString();
             }
@@ -42,13 +42,13 @@ namespace MyBlogSite.BLL.Repositories
             }
         }
 
-        public string YetkiGuncelle(int yetkiId, string yetkiAdi,bool aktifMi)
+        public string YetkiGuncelle(int yetkiId, string yetkiAdi, bool aktifMi)
         {
-            var yetkiGuncelle=Find(y=>y.YetkilerID==yetkiId).FirstOrDefault();
+            var yetkiGuncelle = Find(y => y.YetkilerID == yetkiId).FirstOrDefault();
             try
             {
                 yetkiGuncelle.YetkiAdi = yetkiAdi;
-                yetkiGuncelle.AktifMi= aktifMi;
+                yetkiGuncelle.AktifMi = aktifMi;
                 return DefinationMessages.Guncelleme_basarili.ToString();
 
             }
