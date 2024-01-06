@@ -1,9 +1,5 @@
 ﻿@model MyBlogSite.DLL.Tablolar.Makaleler
 
-@{
-    ViewBag.Title = "AdminMakaleGuncelle";
-    Layout = "~/Areas/AdminPanel/Views/Shared/_AdminLayoutDefault.cshtml";
-}
 @section addTopLibrary{
 
     <link rel="stylesheet" href="~/Areas/AdminPanel/AdminLTE/plugins/summernote/summernote-bs4.min.css">
@@ -15,16 +11,16 @@
             <div class="col-sm-6">
                 <h1 class="m-0">
                 </h1>
-            </div><!-- /.col -->
+            </div>
             <div class="col-sm-6">
 
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="~/AdminPanel/AdminMakaleler/AdminMakalelerIndex">Makaleler</a></li>
                     <li class="breadcrumb-item active">Makale Güncelle</li>
                 </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
 </div>
 <section class="content">
     <div class="container-fluid">
@@ -33,7 +29,6 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <!-- /.card-header -->
                     <div class="card-body">
 
                         @using (Html.BeginForm())
@@ -43,7 +38,7 @@
                             <div class="form-horizontal">
                                 <h4>Makale Güncelle</h4>
                                 <hr />
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger"})
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 @Html.HiddenFor(model => model.MakalelerID)
 
                                 <div class="form-group">
@@ -56,7 +51,6 @@
                                 <div class="col-md-10">
                                     <div class="form-group">
                                         <label>Makele Kategori</label>
-                                        @*@Html.DropDownListFor(k => k.MakaleKategorileri.KategorilerID, (List<SelectListItem>)TempData["makaleKategori"], new { @class = "form-control select2",name="KategorilerID", aria_describeby = "KategorilerID" })*@
                                         <select class="form-control select2" name="makaleKategoriId">
                                             <option selected value="@Model.MakaleKategorileri.KategorilerID">@Model.MakaleKategorileri.KategoriAdi</option>
                                             @foreach (var item in ViewBag.makaleKategori)
@@ -95,6 +89,8 @@
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
                                         <input type="submit" value="Makale Güncelle" class="btn btn-warning" />
+                                    </div>
+                                    <div>
                                         @Html.Raw(ViewBag.mesaj)
                                     </div>
                                 </div>
@@ -102,7 +98,7 @@
                         }
 
                         <div>
-                            @Html.ActionLink("Makalelere Geri Dön", "AdminMakalelerIndex","AdminMakaleler")
+                            @Html.ActionLink("Makalelere Geri Dön", "AdminMakalelerIndex", "AdminMakaleler")
                         </div>
                     </div>
                 </div>
@@ -115,7 +111,6 @@
     <script src="~/Areas/AdminPanel/AdminLTE/plugins/summernote/summernote-bs4.min.js"></script>
     <script>
         $(function () {
-            // Summernote
             $('#MakaleIcerik').summernote()
 
         })</script>

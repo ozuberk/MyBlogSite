@@ -29,12 +29,9 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
             _kategoriRepo = new KategoriRepository(_db);
             _unitOfWork = new UnitOfWork(_db);
         }
-        // GET: AdminPanel/AdminMakaleler
         public ActionResult AdminMakalelerIndex()
         {
-            //MakaleManager makale=new MakaleManager();
-            //var list = makale.MakaleListesi();
-            return View(_makaleRepo.Sp_MakaleListesi()); //sp oluştuktan sonra hata vermeyecek.
+            return View(_makaleRepo.Sp_MakaleListesi());
         }
         [HttpGet]
         public ActionResult AdminMakaleEkle()
@@ -53,8 +50,6 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
                 ViewBag.mesaj = uyariMesaj.Hatali(ekle);
                 return View(kategoriList);
             }
-            //Resimleri kaydet
-            //kategori
 
             int kaydet = _unitOfWork.SaveChanges();
 
@@ -63,7 +58,6 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
                 ViewBag.mesaj = uyariMesaj.Hatali(DefinationMessages.Eklenirken_Hata_Olustu.ToString());
                 return View(kategoriList);
             }
-            //ViewBag.mesaj = @"<div class='alert alert-success' role='alert'>  " + DefinationMessages.Ekleme_basarili.ToString()+ "</div>";
             ViewBag.mesaj = uyariMesaj.Basarili(DefinationMessages.Ekleme_basarili.ToString());
 
             return View(kategoriList);
@@ -71,35 +65,13 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
         [HttpGet]
         public ActionResult AdminMakaleGuncelle(int id)
         {
-            //List<SelectListItem> kategoriList = new List<SelectListItem>();
-            //kategoriList = (from k in _db.MakaleKategorileri.ToList()
-            //                select new SelectListItem
-            //                {
-            //                    Text = k.KategoriAdi,
-            //                    Value = k.KategorilerID.ToString(),
-            //                }).ToList();
-            //TempData["makaleKategori"] = kategoriList;
-            //Bu yapı yerine view tarafında foreach ile makalekategorilerini daha basit ele aldık
             ViewBag.makaleKategori = _kategoriRepo.GetAll();
-
             var makaleBul = _makaleRepo.Get(id);
-
-            //var model2=Tuple.Create<List<SelectList>,List<SelectList>>((List<SelectList>) kategoriList,object();
-            //birden fazla model oluşturmak için kullanılır.
             return View(makaleBul);
         }
         [HttpPost, ValidateInput(false)]
         public ActionResult AdminMakaleGuncelle(int MakalelerID, string MakaleBaslik, string MakaleIcerik, DateTime EklenmeTarihi, bool AktifMi, int makaleKategoriId)
         {
-            //List<SelectListItem> kategoriList = new List<SelectListItem>();
-            //kategoriList = (from k in _db.MakaleKategorileri.ToList()
-            //                select new SelectListItem
-            //                {
-            //                    Text = k.KategoriAdi,
-            //                    Value = k.KategorilerID.ToString(),
-            //                }).ToList();
-
-            //TempData["makaleKategori"] = kategoriList;
             ViewBag.makaleKategori = _kategoriRepo.GetAll();
 
 
@@ -132,7 +104,7 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPost,ActionName("AdminMakaleSil")]//ActionName=> bir method yönlendirme attribute dür. Bu Attribüte aynı isimde olan 2 method için,2. method farklı isimde tanımyaıp ama Attribute içinde tanımlanan methodun post/get olduğunu belirtmek için kullanılır
+        [HttpPost,ActionName("AdminMakaleSil")]
         public ActionResult AdminMakaleDelete(int id)
         {
             var pasitEt = _makaleRepo.MakaleSil(id);
