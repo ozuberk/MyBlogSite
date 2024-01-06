@@ -22,7 +22,7 @@ namespace MyBlogSite.UI.Controllers
         public ActionResult HakkimdaIndex()
         {
             ViewBag.Kullanicilar = kullaniciRepository.KullaniciListesi().Where(k => k.Yetkiler.YetkilerID == 1 || k.Yetkiler.YetkilerID == 2);
-            return View(kullaniciRepository.Get(2));
+            return View(kullaniciRepository.Get(1));
         }
     }
 }

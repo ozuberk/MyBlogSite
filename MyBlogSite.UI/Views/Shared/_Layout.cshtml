@@ -38,6 +38,7 @@
     * License: https://bootstrapmade.com/license/
     ======================================================== -->
     @RenderSection("menuCSS", false)
+    
 </head>
 
 <body>
@@ -55,6 +56,32 @@
                     <li><a href="/Hakkimda/HakkimdaIndex">Hakkımda</a></li>
                     <li><a href="/Proje/ProjeIndex">Projelerim</a></li>
                     <li><a href="/Makale/MakaleIndex">Makaleler</a></li>
+                    @if (Session["userAdiSoyadi"] != null)
+                    {
+                        <li class="dropdown">
+                            <a href="#"><span class="getstarted bi-person">@Session["userAdiSoyadi"]</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li>
+                                    @if (Session["userID"].ToString() == YetkilerEnums.Admin.GetHashCode().ToString() || Session["userID"].ToString() == YetkilerEnums.Yazar.GetHashCode().ToString())
+                                    {
+                                        <a class="dropdown-item" href="~/AdminPanel/AdminAnasayfa/AdminAnasayfaIndex/@TempData["kullaniciID"] ">Admin Paneli</a>
+
+                                    }
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="~/Kullanici/KullaniciCikis">Çıkış</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+
+                            <a href="~/Kullanici/GirisIndex" class="mx-2"><span class="getstarted">  Giriş</span></a>
+                        </li>
+                    }
+
 
                     @*@RenderSection("kategoriGoster", false)*@
                     @* false=> bütün sayfalarda kategoriGoster çağrılması zorunlu değildir analmına gelir *@
@@ -64,42 +91,6 @@
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
-        </div>
-        <div class="position-relative">
-            <ul>
-                @if (Session["userAdiSoyadi"] != null)
-                {
-                    <li class="dropdown">
-                        @*<li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>*@
-
-                        <a href="#" class="mx-2 dropdown"> <span class="getstarted bi-person">@Session["userAdiSoyadi"]</span>  <i class="bi bi-chevron-right"></i></a>
-                        <ul>
-
-                            <li>
-
-                                @if (Session["userID"].ToString() == YetkilerEnums.Admin.GetHashCode().ToString() || Session["userID"].ToString() == YetkilerEnums.Yazar.GetHashCode().ToString())
-                                {
-
-                                    <a class="dropdown-item" href="~/AdminPanel/AdminAnasayfa/AdminAnasayfaIndex/@TempData["kullaniciID"] ">Admin Paneli</a>
-                                }
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="~/Kullanici/KullaniciCikis">Çıkış</a>
-                                @*<a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>*@
-                            </li>
-                        </ul>
-                    </li>
-                }
-                else
-                {
-                    <li>
-
-                        <a href="~/Kullanici/GirisIndex" class="mx-2"><span class="getstarted">  Giriş</span></a>
-                    </li>
-                }
-            </ul>
         </div>
 
     </header><!-- End Header -->
@@ -161,6 +152,8 @@
     <!-- Template Main JS File -->
     <script src="~/Template/assets/js/main.js"></script>
     @RenderSection("menuSecimi", false)
+
+    
 </body>
 
 </html>
