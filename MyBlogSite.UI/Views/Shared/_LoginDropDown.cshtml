@@ -1,19 +1,21 @@
 ﻿
 <ul @*class="nav"*@>
     <li class="dropdown">
-        <a href="#" data-toggle="dropdown">@Session["userAdiSoyadi"]</a>
-        <div class="dropdown-menu multi-column">
-            @*<div class="container-fluid">
-                <div class="row-fluid">*@
-            @*<div class="span6">*@
-            <ul class="dropdown-menu">
-                <li><a href="#">Admin Paneli</a></li>
-                <li><a href="#">Çıkış</a></li>
-                <li><a href="#"></a></li>
-            </ul>
-            @*</div>*@
+        <a href="#">@Session["userAdiSoyadi"]<i class="bi bi-chevron-down"></i></a>
+        @*<div class="container-fluid">
+            <div class="row-fluid">*@
+        @*<div class="span6">*@
+    <ul class="dropdown-menu">
+        @if (true)
+        {
+            <li><a href="#">Admin Paneli</a></li>
 
-        </div>
+        }
+        <li><a href="#">Çıkış</a></li>
+        <li><a href="#"></a></li>
+    </ul>
+        @*</div>*@
+
         @*</div>
             </div>*@
     </li>

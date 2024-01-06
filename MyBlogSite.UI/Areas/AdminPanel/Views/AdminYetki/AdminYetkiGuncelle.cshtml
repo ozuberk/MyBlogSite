@@ -1,47 +1,62 @@
-﻿@model MyBlogSite.UI.Areas.AdminPanel.Controllers.AnasayfaViewToplu
+﻿@model MyBlogSite.DLL.SiteDatabase.Tablolar.YetkiErisimleri
 
 @{
     ViewBag.Title = "AdminYetkiGuncelle";
     Layout = "~/Areas/AdminPanel/Views/Shared/_AdminLayoutDefault.cshtml";
 }
 
-<h2>AdminYetkiGuncelle</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Yetkiler</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ErisimList2)
+<div class="form-horizontal">
+    <h4>YetkiErisimleri</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.YetkiErisimleriID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.YetkiID.YetkiAdi, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.YetkiID.YetkiAdi, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.YetkiList.FirstOrDefault().YetkiAdi, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.YetkiID.YetkiErisimleri.Aciklama, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.YetkiID.YetkiErisimleri.Aciklama, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.YetkiID.YetkiErisimleri.Aciklama, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Yetkiler.FirstOrDefault().YetkiAdi, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Yetkiler.FirstOrDefault().YetkiAdi, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Yetkiler.FirstOrDefault().YetkiAdi, "", new { @class = "text-danger" })
         </div>
     </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Aciklama, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Aciklama, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Aciklama, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="card card-info card-outline">
+            <div class="card-header">
+                <h5 class="card-title">Erişim Alanları</h5>
+            </div>
+            <div class="card-body">
+                @foreach (var item in Model.ErisimAlanlari)
+                {
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="customCheckbox_@item.ErisimAlanlariID" name="selectedSayfalar" value="@item.ErisimAlanlariID"@(item.AktifMi ? "checked":"")>
+                        <label for="customCheckbox_@item.ErisimAlanlariID" class="custom-control-label">@item.ControllerAdi</label>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Yetki Güncelle" class="btn btn-warning" />
+        </div>
+    </div>
+</div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Yetkilere Geri Dön", "AdminYetkiIndex","AdminYetki")
 </div>

@@ -66,25 +66,40 @@
 
         </div>
         <div class="position-relative">
-            @if (Session["userAdiSoyadi"] != null)
-            {
-                <a href="#" class="mx-2 dropdown-toggle"><span class="getstarted bi-person">@Session["userAdiSoyadi"]</span></a>
-                <div class="dropdown-menu">
-                    @if (Session["userID"].ToString() == YetkilerEnums.Admin.GetHashCode().ToString() || Session["userID"].ToString() == YetkilerEnums.Yazar.GetHashCode().ToString())
-                    {
+            <ul>
+                @if (Session["userAdiSoyadi"] != null)
+                {
+                    <li class="dropdown">
+                        @*<li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>*@
 
-                        <a class="dropdown-item" href="~/AdminPanel/AdminAnasayfa/AdminAnasayfaIndex/@TempData["kullaniciID"] ">Admin Paneli</a>
-                    }
-                    <a class="dropdown-item" href="~/Kullanici/KullaniciCikis">Çıkış</a>
-                    @*<a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>*@
-                </div>
-            }
-            else
-            {
-                <a href="~/Kullanici/GirisIndex" class="mx-2"><span class="getstarted">  Giriş</span></a>
-            }
+                        <a href="#" class="mx-2 dropdown"> <span class="getstarted bi-person">@Session["userAdiSoyadi"]</span>  <i class="bi bi-chevron-right"></i></a>
+                        <ul>
+
+                            <li>
+
+                                @if (Session["userID"].ToString() == YetkilerEnums.Admin.GetHashCode().ToString() || Session["userID"].ToString() == YetkilerEnums.Yazar.GetHashCode().ToString())
+                                {
+
+                                    <a class="dropdown-item" href="~/AdminPanel/AdminAnasayfa/AdminAnasayfaIndex/@TempData["kullaniciID"] ">Admin Paneli</a>
+                                }
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="~/Kullanici/KullaniciCikis">Çıkış</a>
+                                @*<a class="dropdown-item" href="#">Something else here</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Separated link</a>*@
+                            </li>
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li>
+
+                        <a href="~/Kullanici/GirisIndex" class="mx-2"><span class="getstarted">  Giriş</span></a>
+                    </li>
+                }
+            </ul>
         </div>
 
     </header><!-- End Header -->

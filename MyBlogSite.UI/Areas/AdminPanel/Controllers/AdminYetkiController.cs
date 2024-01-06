@@ -41,6 +41,11 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
             };
             return View(viewModel);
         }
+
+
+
+
+
         public ActionResult AdminYetkiEkle()
         {
             var sayfaList = _sayfalarRepo.SayfaListesi();
@@ -122,8 +127,9 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult AdminSayfaEkle(int id, int[] selectedSayfalar)
+        public ActionResult AdminSayfaEkle(int id, params int[] selectedSayfalar)
         {
+           
 
             var sayfaList = _sayfalarRepo.SayfaListesi();
             var yetkiList = _yetkiRepo.YetkiListesi();
@@ -163,38 +169,25 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
 
         public ActionResult AdminYetkiGuncelle(int id)
         {
-
-            var yetkiBul = _yetkiRepo.Get(id);
             var erisimList = _yetkiErisimRepo.Sp_YetkiErisimListesi(id).ToList();
-            var yetkiList = _yetkiRepo.GetAll();
+            var yetkiErisimList = _yetkiErisimRepo.YetkiErisimListesi();
+            var erisimBul = _yetkiErisimRepo.Get(id);
 
-            var viewModel = new AnasayfaViewToplu
-            {
-                YetkiID = yetkiBul,
-                ErisimList2 = erisimList,
-                YetkiList = yetkiList.ToList()
-
-            };
-            return View(viewModel);
+            return View(erisimBul);
         }
         [HttpPost, ActionName("AdminYetkiGuncelle")]
-        public ActionResult AdminYetkiGuncelle_(int id)
+        public ActionResult AdminYetkiGuncelle_(int id,string yetkiAdi,string erisimAciklama,params int[] selecctedSayfalar)
         {
-            var yetkiBul = _yetkiRepo.Get(id);
-            var erisimList = _yetkiErisimRepo.Sp_YetkiErisimListesi(id).ToList();
-            var yetkiList = _yetkiRepo.GetAll();
-            var erisimBul = _yetkiErisimRepo.Get2(y => y.Yetkiler.FirstOrDefault().YetkilerID == id);
-            TempData["erisimAlanBul"] = erisimList;
+            
 
-            var viewModel = new AnasayfaViewToplu
-            {
-                YetkiID = yetkiBul,
-                ErisimList2 = erisimList,
-                YetkiList = yetkiList.ToList(),
-                erisimIDd = erisimBul
-            };
-            //var yetkiBul = _yetkiRepo.Get(id);
-            return View(viewModel);
+
+
+
+
+
+            var erisimBul = _yetkiErisimRepo.Get(id);
+
+            return View(erisimBul);
 
         }
 
