@@ -26,7 +26,6 @@ namespace MyBlogSite.UI.Areas.AdminPanel.Controllers
             _yetkiRepo = new YetkiRepository(_db);
             _unitOfWork = new UnitOfWork(_db);
         }
-        // GET: AdminPanel/AdminKullanici
         public ActionResult AdminKullaniciIndex()
         {
             return View(_kullaniciRepo.KullaniciListesi());

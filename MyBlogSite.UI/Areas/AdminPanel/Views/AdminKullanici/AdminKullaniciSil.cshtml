@@ -1,8 +1,4 @@
 ﻿@model MyBlogSite.DLL.Tablolar.Kullanicilar
-@{
-    ViewBag.Title = "AdminKullaniciSil";
-    Layout = "~/Areas/AdminPanel/Views/Shared/_AdminLayoutDefault.cshtml";
-}
 <section class="content">
     <div class="container-fluid">
 
@@ -10,7 +6,6 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <!-- /.card-header -->
                     <div class="card-body">
                         @using (Html.BeginForm())
                         {
@@ -37,6 +32,9 @@
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
                                         <input type="submit" value="SİL" class="btn btn-danger" />
+                                    </div>
+                                    <div>
+                                        @Html.Raw(ViewBag.mesaj)
                                     </div>
                                 </div>
                             </div>
